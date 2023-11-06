@@ -1,0 +1,42 @@
+[
+  {
+    "food_image": "https://i.ibb.co/VHjJz3M/tom-yum-soup.png",
+    "food_name": "Tom Yum Soup",
+    "food_category": "Thai",
+    "food_quantity": "1 bowl",
+    "food_description": "Spicy and sour soup with herbs and seafood",
+    "food_origin": "Thailand",
+    "chef_name": "Somchai",
+    "price": 9.99
+  },
+  {
+    "food_image": "https://i.ibb.co/ZNJGgQ2/rsz-green-curry.png",
+    "food_name": "Green Curry",
+    "food_category": "Thai",
+    "food_quantity": "1 plate",
+    "food_description": "Spicy coconut milk curry with meat and vegetables",
+    "food_origin": "Thailand",
+    "chef_name": "Somsak",
+    "price": 11.99
+  },
+  {
+    "food_image": "https://i.ibb.co/HtNCBKp/padl.png",
+    "food_name": "Pad Thai",
+    "food_category": "Thai",
+    "food_quantity": "1 plate",
+    "food_description": "Stir-fried rice noodles with eggs, tofu, and shrimp",
+    "food_origin": "Thailand",
+    "chef_name": "Nong",
+    "price": 999.99
+  },
+  {
+    "food_image": "https://i.ibb.co/z274wKL/rsz-mango-sticky-rice.png",
+    "food_name": "Mango Sticky Rice",
+    "food_category": "Thai",
+    "food_quantity": "1 plate",
+    "food_description": "Sweet glutinous rice topped with fresh mango slices",
+    "food_origin": "Thailand",
+    "chef_name": "Pim",
+    "price": 723.99
+  }
+]

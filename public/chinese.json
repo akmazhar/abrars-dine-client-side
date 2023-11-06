@@ -1,0 +1,42 @@
+[
+  {
+    "food_image": "https://i.ibb.co/4YvQpfC/Dmplingk.png",
+    "food_name": "Dumplings",
+    "food_category": "Chinese",
+    "food_quantity": "6 pieces",
+    "food_description": "Steamed dumplings with a savory pork and vegetable filling.",
+    "food_origin": "China",
+    "chef_name": "Li Ming",
+    "price": 8.99
+  },
+  {
+    "food_image": "https://i.ibb.co/GPz45BZ/Kung-pao-chicken.png",
+    "food_name": "Kung Pao Chicken",
+    "food_category": "Chinese",
+    "food_quantity": "1 plate",
+    "food_description": "A classic Sichuan dish with diced chicken, peanuts, and vegetables in a spicy sauce.",
+    "food_origin": "China",
+    "chef_name": "Chen Wei",
+    "price": 12.99
+  },
+  {
+    "food_image": "https://i.ibb.co/x1LJNrt/spring-rolls.png",
+    "food_name": "Spring Rolls",
+    "food_category": "Chinese",
+    "food_quantity": "4 pieces",
+    "food_description": "Crispy fried spring rolls filled with vegetables and sometimes meat.",
+    "food_origin": "China",
+    "chef_name": "Wang Tao",
+    "price": 6.99
+  },
+  {
+    "food_image": "https://i.ibb.co/9bF54WJ/rsz-1photo.png",
+    "food_name": "Mapo Tofu",
+    "food_category": "Chinese",
+    "food_quantity": "1 bowl",
+    "food_description": "A popular Sichuan dish made with tofu, minced meat, and a spicy sauce.",
+    "food_origin": "China",
+    "chef_name": "Zhang Mei",
+    "price": 10.99
+  }
+]
