@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { updateProfile } from 'firebase/auth';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import { FcGoogle } from 'react-icons/fc';
+import Swal from 'sweetalert2';
+
 
 
 
@@ -62,7 +64,11 @@ setSuccess('');
               // Toast.success('User Created Successfully');
                 window.location.reload();
                 setSuccess('User Created Successfully');
-                
+                return Swal.fire({
+                  icon: "success",
+                  title: "Successfully registered",
+                  text: "Thank you!",
+                });
             })
             .catch(error => {
                 console.log(error)
@@ -90,26 +96,26 @@ setSuccess('');
 
 
     return (
-      <div>
-      <div className='grid  md:grid-cols-2 items-start'>
-  
-    <div>
-    <div className="hero man-w-screen  rounded-e-3xl">
-      <div className="hero-content flex-col">
-        
-        
-        {/* <div className="text-left lg:text-left">
-          <h1 className="text-5xl text-green-600 font-mono font-semibold">Register Now!</h1>
-        </div> */}
-        <div className="card flex-shrink-0 w-full max-w-lg shadow-3xl ml-96 mr-52 bg-base-200  shadow-red-600 rounded-e-3xl rounded-s-md">
-
-        <img className='mt-10 mb-5 mr-20  ml-24 w-64' src="https://i.ibb.co/m9BTq7Q/l.png" alt="" />
-          <form onSubmit={handleRegister} className="card-body">
+     
+      // <div className='grid  md:grid-cols-2 items-start'>
+      // <div className="hero man-w-screen  rounded-e-3xl">
+      // <div className="text-center lg:text-left w-1/2">
+      //  <div className="card flex-shrink-0 w-full max-w-lg shadow-3xl ml-96 mr-52 bg-base-200  shadow-red-600 rounded-e-3xl rounded-s-md">
+      // <div className="card flex-shrink-0 w-full max-w-lg shadow-3xl mr-52 bg-white  shadow-red-600 rounded-e-3xl rounded-s-md">
       
-
-          <div className="form-control">
+      <div className="hero min-h-screen">
+        <div className="hero-content lg:flex-cols-reverse">
+        <div className="w-96 hover:scale-110 transition-all aos-init aos-animate">
+       <img className='justify-start w-4/5 ' src="https://i.ibb.co/WHrNMdP/jjk.png" alt="" />   
+       </div>
+       
+      <div>
+        <div className='grid grid-cols-1 lg:grid-cols-2'>
+        <div>
+          <form onSubmit={handleRegister} className="card-body mr-5 mt-2 shadow-2xl shadow-red-800 py-8 px-16 mb-2 rounded-e-full rounded-ss-full bg-cyan-300">
+         <div className="form-control">
                 <label className="label">
-                  <span className="label-text ml-3 text-base  text-blue-600  font-serif">Your Name</span>
+                  <span className="label-text ml-3 text-base  text-blue-900  font-sans">Your Name</span>
                 </label>
                 <input
                       type="text"
@@ -121,7 +127,7 @@ setSuccess('');
                   </div>
     
                   <label className="label">
-                    <span className="label-text ml-3 text-base  text-blue-600  font-serif">Photo URL</span>
+                    <span className="label-text ml-3 text-base  text-blue-900  font-sans">Photo URL</span>
                   </label>
                   <input
                     type="url"
@@ -131,7 +137,7 @@ setSuccess('');
                   />
     
                   <label className="label">
-                    <span className="label-text ml-3 text-base  text-blue-600  font-serif">Email</span>
+                    <span className="label-text ml-3 text-base  text-blue-900  font-sans">Email</span>
                   </label>
                   <input
                     type="email"
@@ -143,7 +149,7 @@ setSuccess('');
     
                   <div className="form-control">
                     <label className="label">
-                      <span className="label-text ml-3 text-base  text-blue-600 font-serif">Password</span>
+                      <span className="label-text ml-3 text-base  text-blue-900 font-sans">Password</span>
                     </label>
                     <input
                       type="password"
@@ -182,8 +188,8 @@ setSuccess('');
                             name="terms"
                             id="terms"
                           />
-                          <label className="textarea" htmlFor="terms">
-                            Accept our <a href="#">Terms and Condition</a>
+                          <label className="textarea bg-cyan-300" htmlFor="terms">
+                            Accept our <a href="#">Terms & Condition</a>
                           </label>
                         </li>
                       </ul>
@@ -198,11 +204,36 @@ setSuccess('');
               </form>
               {registerError && <p className="text-red-700">{registerError}</p>}
               {success && <p className="text-green-700">{success}</p>} 
+            
+        </div>
+        <div>
+                   
+       <div className="stats bg-yellow-500 mt-48 rounded-e-full rounded-s-full hover:scale-110 transition-all w-full aos-init aos-animate shadow-2xl">
+       <div className="stat">
+       <div className="stat-title text-black font-sans text-center">Already have an account? <Link className="font-serif" to="/login">
+       <button className="btn text-green-800 bg-yellow-500 border-y-yellow-500  border-x-yellow-500 font-bold">Login</button>
+      </Link></div>
+      <p className="font-mono font-semibold text-white text-center items-center mb-1">Or Login With</p>
+       <button onClick={handleGoogleSignIn}
+          className="btn bg-black rounded-s-3xl mb-1 rounded-e-3xl px-32 py-2 text-orange-300"
+        >
+          <FcGoogle className='w-8 h-6'></FcGoogle>
+        </button>
+    {/* <div className="stat-desc">21% more than last month</div> */}
+  </div>
+  
+</div>
+            
+        </div>
+      </div>
 
-              <p className="font-serif text-start ml-24">
-    <i>  Already have an account? So
-      
-      <Link className="font-serif" to="/login">
+            
+            
+            
+              {/* <p className="font-serif text-start ml-10">
+              <i>  Already have an account? So
+
+            <Link className="font-serif" to="/login">
         <button className="btn btn-link text-green-700 font-bold">Login</button>
       </Link>
 
@@ -211,23 +242,19 @@ setSuccess('');
 
     <p className="   font-mono py-5 font-semibold  text-orange-800 text-center items-center" >Or Login With</p> <p>
         <button onClick={handleGoogleSignIn}
-          className="btn bg-black rounded-s-3xl mb-5 rounded-e-3xl px-32 ml-32 mr-5 py-2 text-orange-300"
+          className="btn bg-black rounded-s-3xl mb-5 rounded-e-3xl px-32 ml-10 mr-5 py-2 text-orange-300"
         >
           <FcGoogle className='w-8 h-6'></FcGoogle>
         </button>
       </p>
+ */}
 
-
-        
-
-            </div>
+    
+      </div>
           </div>
            {/* <ToastContainer></ToastContainer>  */}
-        </div>
-        </div>
        </div>
-      </div>
-  
+      
     );
 };
 

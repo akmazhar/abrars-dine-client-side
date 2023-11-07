@@ -6,13 +6,15 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBIYxzAx1shJnzERlOjl92pEl4HlYHx2dc",
-  authDomain: "abrars-automobile.firebaseapp.com",
-  projectId: "abrars-automobile",
-  storageBucket: "abrars-automobile.appspot.com",
-  messagingSenderId: "567937125274",
-  appId: "1:567937125274:web:5b1a5fe4db22a4b8f24823"
+  apiKey: "AIzaSyAOuHhkTBTc-Xq2RyibgMppySuxeXbjv90",
+  authDomain: "abrar-restaurent.firebaseapp.com",
+  projectId: "abrar-restaurent",
+  storageBucket: "abrar-restaurent.appspot.com",
+  messagingSenderId: "814327936526",
+  appId: "1:814327936526:web:b17d488ee6d53703122e5f"
 };
+
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

@@ -5,6 +5,7 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../../firebase/firebase.config';
 import { FcGoogle } from "react-icons/fc";
+import Swal from 'sweetalert2';
 
 
 const Login = () => {
@@ -24,10 +25,20 @@ const Login = () => {
       console.log(result);
       setLoginError('');
       setSuccess('Login Successful');
+      Swal.fire({
+        icon: 'success',
+        title: 'Login Successful',
+        text: 'Welcome back!',
+      });
     } catch (error) {
       console.error(error);
       setLoginError('Invalid email or password. Please try again.');
       setSuccess('');
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Error',
+        text: 'Invalid email or password. Please try again.',
+      });
     }
   };
 
@@ -72,9 +83,10 @@ return (
      
       <div className="hero min-h-screen">
         <div className="hero-content lg:flex-cols-reverse">
-        <div className="w-96 h-96">
+        <div className="w-96 h-96 hover:scale-110 transition-all aos-init aos-animate">
       <img src="https://i.ibb.co/gwJzscB/login.jpg" alt="" />
-      <button className="btn"><img className="w- h-32" src="https://i.ibb.co/q78mzCW/Screenshot-2023-10-24-121543.png" alt="" /></button>
+      {/* <iframe src="https://gifer.com/embed/ID5G" width="480" height="672" frameBorder="0" allowFullScreen></iframe><p><a href="https://gifer.com"></a></p> */}
+      <button className="btn"><img className="w- h-32" src="https://i.ibb.co/wJvJzgz/lop.png" alt="" /></button>
        
     
       </div>
@@ -82,10 +94,10 @@ return (
   {/* <div className="text-start lg:text-left">
     <h1 className="text-5xl text-indigo-600 font-mono font-bold">Login!</h1>
   </div> */}
-  <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100">
+  <div className="card flex-shrink-0  max-w-lg hover:scale-110 transition-all w-full aos-init aos-animate shadow-2xl shadow-red-500 bg-green-300 rounded-e-2xl rounded-s-full">
     
 
-    <form onSubmit={handleLogin} className="card-body bg-cyan-400 rounded-full"> 
+    <form onSubmit={handleLogin} className="card-body"> 
 
 
 
@@ -125,11 +137,11 @@ return (
   </div>
   <div className="form-control mt-6">
     <button className="btn btn-primary">Login</button>
-    <p className="font-serif text-start ml-20">
-    <i>  Don't have an account?
+    <p className="font-serif text-start ml-10">
+    <i>  Do not have an account?
       
       <Link className="font-serif" to="/register">
-        <button className="btn btn-link text-green-700 font-bold">Register</button>
+        <button className="btn bg-green-300 border-y-green-300 border-x-green-300 text-red-500 font-bold">Register</button>
       </Link>
 
       first.</i>

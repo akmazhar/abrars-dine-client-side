@@ -10,7 +10,7 @@ const ErrorPage = () => {
            
             <div>
             <div className=" ml-96 mb-5 items-center justify-center">
-           <img src="https://i.ibb.co/VQ91jpG/404.png" alt="" />
+            <iframe src="https://gifer.com/embed/Isov" width="480" height="169" frameBorder="0" allowFullScreen></iframe><p><a href="https://gifer.com"></a></p>
       </div>
       
             </div>

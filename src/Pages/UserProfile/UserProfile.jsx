@@ -1,6 +1,7 @@
 
 
-const AllFooditems = () => {
+const UserProfile = () => {
+
     return (
         <div>
             
@@ -8,4 +9,4 @@ const AllFooditems = () => {
     );
 };
 
-export default AllFooditems;
+export default UserProfile;
