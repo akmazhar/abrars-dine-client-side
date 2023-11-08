@@ -1,0 +1,245 @@
+[
+  {
+    "food_image": "https://i.ibb.co/kDwG2Ww/Kachchi-biryani.png",
+    "food_name": "Kachchi Biriany",
+    "food_category": "Bangladeshi",
+    "food_quantity": "200g",
+    "food_description": "A traditional Bangladeshi Kachchi Biriany. It's really tough to get good Kachchi Biryani in Dhaka city. It makes mouth water just to think about it.",
+    "food_origin": "Bangladesh",
+    "chef_name": "Chef Rahman",
+    "price": 415.99
+  },
+  {
+    "food_image": "https://i.ibb.co/m8CJ6BN/Beef-Tehari.png",
+    "food_name": "Beef Tehari",
+    "food_category": "Bangladeshi",
+    "food_quantity": "300g",
+    "food_description": "A delicious Bangladeshi rice dish cooked with aromatic spices and tender beef, known for its unique flavor and texture.",
+    "food_origin": "Bangladesh",
+    "chef_name": "Chef Ali",
+    "price": 512.99
+  },
+  {
+    "food_image": "https://i.ibb.co/hm4TG0f/Panta.png",
+    "food_name": "Panta Ilish",
+    "food_category": "Bangladeshi",
+    "food_quantity": "250g",
+    "food_description": "A traditional Bangladeshi dish consisting of fermented rice and Hilsa fish, usually served with various accompaniments.",
+    "food_origin": "Bangladesh",
+    "chef_name": "Chef Sultana",
+    "price": 310.99
+  },
+  {
+    "food_image": "https://i.ibb.co/GR6wVfk/bhuna.png",
+    "food_name": "Bhuna Khichuri",
+    "food_category": "Bangladeshi",
+    "food_quantity": "350g",
+    "food_description": "A flavorful and spicy Bengali rice dish made with a mix of lentils, vegetables, and aromatic spices, known for its comforting taste.",
+    "food_origin": "Bangladesh",
+    "chef_name": "Chef Islam",
+    "price": 934.99
+  },
+  
+    {
+      "food_image": "https://i.ibb.co/4YvQpfC/Dmplingk.png",
+      "food_name": "Dumplings",
+      "food_category": "Chinese",
+      "food_quantity": "6 pieces",
+      "food_description": "Steamed dumplings with a savory pork and vegetable filling.",
+      "food_origin": "China",
+      "chef_name": "Li Ming",
+      "price": 8.99
+    },
+    {
+      "food_image": "https://i.ibb.co/GPz45BZ/Kung-pao-chicken.png",
+      "food_name": "Kung Pao Chicken",
+      "food_category": "Chinese",
+      "food_quantity": "1 plate",
+      "food_description": "A classic Sichuan dish with diced chicken, peanuts, and vegetables in a spicy sauce.",
+      "food_origin": "China",
+      "chef_name": "Chen Wei",
+      "price": 12.99
+    },
+    {
+      "food_image": "https://i.ibb.co/x1LJNrt/spring-rolls.png",
+      "food_name": "Spring Rolls",
+      "food_category": "Chinese",
+      "food_quantity": "4 pieces",
+      "food_description": "Crispy fried spring rolls filled with vegetables and sometimes meat.",
+      "food_origin": "China",
+      "chef_name": "Wang Tao",
+      "price": 6.99
+    },
+    {
+      "food_image": "https://i.ibb.co/9bF54WJ/rsz-1photo.png",
+      "food_name": "Mapo Tofu",
+      "food_category": "Chinese",
+      "food_quantity": "1 bowl",
+      "food_description": "A popular Sichuan dish made with tofu, minced meat, and a spicy sauce.",
+      "food_origin": "China",
+      "chef_name": "Zhang Mei",
+      "price": 10.99
+    },
+    {
+      "food_image": "https://i.ibb.co/FnV8Ccy/rsz-lasagna.png",
+      "food_name": "Lasagna",
+      "food_category": "Italian",
+      "food_quantity": "1 portion",
+      "food_description": "Layers of pasta, meat, and cheese baked to perfection.",
+      "food_origin": "Italy",
+      "chef_name": "Giuseppe Rossi",
+      "price": 12.99
+    },
+    {
+      "food_image": "https://i.ibb.co/fX5KqS5/rsz-pizza-margherita.png",
+      "food_name": "Pizza Margherita",
+      "food_category": "Italian",
+      "food_quantity": "1 pizza",
+      "food_description": "Classic Neapolitan pizza topped with tomatoes, mozzarella, and basil.",
+      "food_origin": "Italy",
+      "chef_name": "Antonio Bianchi",
+      "price": 9.99
+    },
+    {
+      "food_image": "https://i.ibb.co/fMj3k0B/Risotto-alla.png",
+      "food_name": "Risotto alla Milanese",
+      "food_category": "Italian",
+      "food_quantity": "1 serving",
+      "food_description": "Creamy saffron-infused rice dish from Milan.",
+      "food_origin": "Italy",
+      "chef_name": "Sophia De Luca",
+      "price": 14.99
+    },
+    {
+      "food_image": "https://i.ibb.co/qgT3Rh6/Tiramisu-re.png",
+      "food_name": "Tiramisu",
+      "food_category": "Italian",
+      "food_quantity": "1 slice",
+      "food_description": "Classic Italian dessert made with layers of coffee-soaked ladyfingers and mascarpone cheese.",
+      "food_origin": "Italy",
+      "chef_name": "Giovanni Fiore",
+      "price": 7.99
+    },
+    {
+      "food_image": "https://i.ibb.co/2vtCt96/kkk.png",
+      "food_name": "Sushi Platter",
+      "food_category": "Japanese",
+      "food_quantity": "10 pieces",
+      "food_description": "Assorted sushi rolls with fresh fish and vegetables",
+      "food_origin": "Japan",
+      "chef_name": "Sakura Yamamoto",
+      "price": 24.99
+    },
+    {
+      "food_image": "https://i.ibb.co/WcZ96R4/rsz-ramen.png",
+      "food_name": "Ramen Bowl",
+      "food_category": "Japanese",
+      "food_quantity": "1 bowl",
+      "food_description": "Traditional Japanese noodle soup with soy sauce base and various toppings",
+      "food_origin": "Japan",
+      "chef_name": "Taro Tanaka",
+      "price": 12.99
+    },
+    {
+      "food_image": "https://i.ibb.co/gJnvrq1/rsz-1tempura-platter.png",
+      "food_name": "Tempura Platter",
+      "food_category": "Japanese",
+      "food_quantity": "Assorted pieces",
+      "food_description": "Lightly battered and deep-fried seafood and vegetables",
+      "food_origin": "Japan",
+      "chef_name": "Yoshihiro Nakamura",
+      "price": 18.99
+    },
+    {
+      "food_image": "https://i.ibb.co/VxyNw69/rsz-miso-soup.png",
+      "food_name": "Miso Soup",
+      "food_category": "Japanese",
+      "food_quantity": "1 bowl",
+      "food_description": "Traditional Japanese soup made with dashi stock and miso paste, with tofu and seaweed",
+      "food_origin": "Japan",
+      "chef_name": "Akihiro Suzuki",
+      "price": 6.99
+    },
+
+    {
+      "food_image": "https://i.ibb.co/SNP5Lmc/tacosh.png",
+      "food_name": "Taco",
+      "food_category": "Mexican",
+      "food_quantity": "1 piece",
+      "food_description": "A traditional Mexican dish consisting of a corn or wheat tortilla folded or rolled around a filling.",
+      "food_origin": "Mexico",
+      "chef_name": "Maria Garcia",
+      "price": 3.99
+    },
+    {
+      "food_image": "https://i.ibb.co/MGjFP1j/H.png",
+      "food_name": "Burrito",
+      "food_category": "Mexican",
+      "food_quantity": "1 piece",
+      "food_description": "A type of Mexican and Tex-Mex food, consisting of a wheat flour tortilla wrapped or folded into a cylindrical shape to completely enclose the filling.",
+      "food_origin": "Mexico",
+      "chef_name": "Juan Martinez",
+      "price": 8.99
+    },
+    {
+      "food_image": "https://i.ibb.co/s3KgBVy/Guacamolen.png",
+      "food_name": "Guacamole",
+      "food_category": "Mexican",
+      "food_quantity": "100 grams",
+      "food_description": "A popular Mexican avocado-based dip, spread, or salad first developed by the Aztecs.",
+      "food_origin": "Mexico",
+      "chef_name": "Alejandra Rodriguez",
+      "price": 5.99
+    },
+    {
+      "food_image": "https://i.ibb.co/sQPhzMH/Eenchiladas.png",
+      "food_name": "Enchiladas",
+      "food_category": "Mexican",
+      "food_quantity": "1 serving",
+      "food_description": "A popular Mexican dish, made with tortillas rolled around a filling and covered with a chili pepper sauce.",
+      "food_origin": "Mexico",
+      "chef_name": "Carlos Sanchez",
+      "price": 9.99
+    },
+    {
+      "food_image": "https://i.ibb.co/VHjJz3M/tom-yum-soup.png",
+      "food_name": "Tom Yum Soup",
+      "food_category": "Thai",
+      "food_quantity": "1 bowl",
+      "food_description": "Spicy and sour soup with herbs and seafood",
+      "food_origin": "Thailand",
+      "chef_name": "Somchai",
+      "price": 9.99
+    },
+    {
+      "food_image": "https://i.ibb.co/ZNJGgQ2/rsz-green-curry.png",
+      "food_name": "Green Curry",
+      "food_category": "Thai",
+      "food_quantity": "1 plate",
+      "food_description": "Spicy coconut milk curry with meat and vegetables",
+      "food_origin": "Thailand",
+      "chef_name": "Somsak",
+      "price": 11.99
+    },
+    {
+      "food_image": "https://i.ibb.co/HtNCBKp/padl.png",
+      "food_name": "Pad Thai",
+      "food_category": "Thai",
+      "food_quantity": "1 plate",
+      "food_description": "Stir-fried rice noodles with eggs, tofu, and shrimp",
+      "food_origin": "Thailand",
+      "chef_name": "Nong",
+      "price": 999.99
+    },
+    {
+      "food_image": "https://i.ibb.co/z274wKL/rsz-mango-sticky-rice.png",
+      "food_name": "Mango Sticky Rice",
+      "food_category": "Thai",
+      "food_quantity": "1 plate",
+      "food_description": "Sweet glutinous rice topped with fresh mango slices",
+      "food_origin": "Thailand",
+      "chef_name": "Pim",
+      "price": 723.99
+    }
+  ]
+  
