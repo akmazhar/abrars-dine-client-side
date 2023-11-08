@@ -6,11 +6,11 @@ const ErrorPage = () => {
     return (
       
         
-        <div className="py-10 shadow-lg my-56">
+        <div>
            
             <div>
-            <div className=" ml-96 mb-5 items-center justify-center">
-            <iframe src="https://gifer.com/embed/Isov" width="480" height="169" frameBorder="0" allowFullScreen></iframe><p><a href="https://gifer.com"></a></p>
+            <div className=" ml-56 mr-56 mb-4 items-center justify-center shadow-2xl">
+            <img src="https://i.ibb.co/sKLmbxp/error.png" alt="" />
       </div>
       
             </div>
