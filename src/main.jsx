@@ -16,12 +16,14 @@ import Login from './Pages/Login/Login';
 import Blog from './Pages/Blog/Blog';
 import AllFood from './Pages/AllFood/AllFood';
 import EachCard from './Pages/EachCard/EachCard';
-import FoodCards from './Pages/FoodCards/FoodCards';
 import FoodPurchase from './Pages/FoodPurchase/FoodPurchase';
 import MyOrder from './Pages/MyOrder/MyOrder';
 import Pagination from './Pages/Pagination/Pagination';
 import SearchFunctionality from './Pages/SearchFunctionality/SearchFunctionality';
 import SingleFood from './Pages/SingleFood/SingleFood';
+import AddFood from './Pages/AddFood/AddFood';
+import UpdateFood from './Pages/UpdateFood/UpdateFood';
+import FoodCard from './Pages/FoodCard/FoodCard';
 // import Banner from './Pages/Shared/Banner/Banner';
 // import Navbar from './Pages/Shared/Header/Navbar/Navbar';
 // import Footer from './Pages/Shared/Footer/Footer';
@@ -51,10 +53,10 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login></Login>
   },
-  // {
-  //   path: "/addFood",
-  //   element: <AddFood>,</AddFood>
-  // },
+  {
+    path: "/addFood",
+    element: <AddFood>,</AddFood>
+  },
   {
     path: "/allFood",
     element: <AllFood></AllFood>
@@ -68,8 +70,8 @@ const router = createBrowserRouter([
     element: <EachCard></EachCard>
   },
   {
-    path: "/foodCards",
-    element: <FoodCards></FoodCards>
+    path: "/foodCard",
+    element: <FoodCard></FoodCard>
   },
   {
     path: "/foodPurchase",
@@ -95,10 +97,10 @@ const router = createBrowserRouter([
     path: "/singleFood",
     element: <SingleFood></SingleFood>
   },
-  // {
-  //   path: "/updateFood",
-  //   element: <UpdateFood></UpdateFood>
-  // },
+  {
+    path: "/updateFood",
+    element: <UpdateFood></UpdateFood>
+  },
 
   //  {
   //   path: "/navbar",

@@ -30,7 +30,7 @@ const SingleFood = () => {
                                 <h2 className="font-bold text-pink-700 font-serif">{data.food_name}</h2>
                                 <p className="font-sans font-bold text-cyan-900">Category : {data.food_category}</p>
                                 <p className="font-mono text-blue-500">Origin : {data.food_origin}</p>
-                                <p className="font-sans text-yellow-700">Made By : {data.chef_name}</p>
+                                <p className="font-sans text-white text-center bg-lime-950">Made By : {data.chef_name}</p>
                                 <p className="font-serif text-black">Origin : {data.food_description}</p>
                                 <h2 className="font-mono text-red-600 font-bold">Price : $ {data.price}</h2>
                                 <div className="btn-group btn-group-vertical mt-1 ml-12 space-y-3 justify-center">

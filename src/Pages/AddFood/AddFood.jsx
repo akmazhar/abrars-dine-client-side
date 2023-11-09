@@ -1,20 +1,20 @@
 import Swal from "sweetalert2";
 
-const AddProduct = () => {
+const AddFood = () => {
 
-    const AddFood handleAddFood = event => {
+    const handleAddFood = event => {
         event.preventDefault();
         
         const form = event.target;
-        const name = form.name.value;
-        const category = form.category.value;
-        const quantity = form.quantity.value;
-        const origin = form.origin.value;
+        const food_name = form.food_name.value;
+        const food_category = form.food_category.value;
+        const food_quantity = form.food_quantity.value;
+        const food_origin = form.food_origin.value;
         const price = form.price.value;
-        const shortDescription = form.shortDescription.value;
-        const image = form.image.value;
+        const food_description = form.food_description.value;
+        const food_image = form.food_image.value;
         
-        const newFood = {name, category, price, quantity, origin, shortDescription, image};
+        const newFood = {food_name, food_category, price, food_quantity, food_origin, food_description, food_image};
         console.log(newFood);
 
         //send data to the server
@@ -43,15 +43,15 @@ const AddProduct = () => {
 
     return (
 
-        <div className="bg-[#c2f4bc] p-40">
-              
-             <div className="flex justify-center items-center text-center mb-5 rounded-3xl">
-             {/* <h1 className='text-3xl text-center font-extrabold font-mono p-3 ml-40 text-blue-600'>Pick Your Car<span className='text-orange-950 font-semibold font-serif'> : Quiet, Rapid, Classic Elegance.</span></h1> */}
+        <div className="bg-[#0e0f0e]">
+
+             <div className="flex justify-center items-center text-center">
              {/* <img className="justify-center items-center" src="/car.png" alt="" width={200}/> */}
-             <img className="justify-center items-center" src="https://i.ibb.co/3vdvt4k/1.png" alt="" width={1250}/>
+             <img className="justify-center items-center " src="https://i.ibb.co/3vdvt4k/1.png" alt="" width={1250}/>
              </div>
 
-        <form onSubmit={handleAddFood}>
+        <form className="p-40 rounded-t-full rounded-b-full bg-lime-100" onSubmit={handleAddFood}>
+       <h1 className='text-4xl text-center font-extrabold font-mono mb-10 p-3 text-blue-700'>Add Your Food<span className='text-red-500 font-semibold font-serif'> : Globally Delicious.</span></h1>
         <div className="md:flex gap-2 justify-center mb-5">
         <div className="form-control md:w-1/2">
             <label className="label">
@@ -81,7 +81,7 @@ const AddProduct = () => {
               <span className="label-text font-semibold font-serif text-lg">Short Description</span>
                     </label>
                     <label className="input-group">
-             <input type="shortDescription" name="shortDescription" placeholder="Description of Car/Brand"  className="input input-bordered w-full" />
+             <input type="shortDescription" name="shortDescription" placeholder="Description of Food"  className="input input-bordered w-full" />
           </label>
        </div>
         </div>
@@ -131,15 +131,10 @@ const AddProduct = () => {
              <input type="photo" name="image" placeholder="Paste Image URL" className="input input-bordered w-full" />
           </label>
        </div>
-
       </div>
       <input type="submit" value="Add & Pick Your Delicious Food" className="btn btn-block bg-[#652525] text-white text-xl p-3 mt-5 font-mono rounded-lg" />
-      </form>
-   
-        </div>
-
-
-
+      </form> 
+      </div>
     );
 };
 

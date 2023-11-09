@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../../AuthProvider/AuthProvider';
 import Toast from './../../../Toast/Toast';
 import Logo from '../Logo/Logo';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { TbUserCircle } from "react-icons/tb";
 
 
@@ -118,8 +118,8 @@ const Navbar = () => {
                                 </div> 
                             </label>
                             <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow font-mono text-sm menu menu-sm dropdown-content bg-purple-900 text-white rounded-box w-52">
-                                <li><a>My added food items</a></li>
-                                <li><a>Add a food item</a></li>
+                            <li><a>My added food items</a></li>
+                            <Link to="/addfood"><li><a>Add a food item</a></li></Link>
                                 <li><a>My ordered food items</a></li>
                             </ul>
                         </div>
