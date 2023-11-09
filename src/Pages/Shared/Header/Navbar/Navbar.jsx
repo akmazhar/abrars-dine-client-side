@@ -98,19 +98,44 @@ const Navbar = () => {
 
                       }
 
-               <li>
-              <NavLink
+               <li >
+              {/* <NavLink
                 to="/userProfile"
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "text-rose-600" : ""
                               }
                             >
-                        <TbUserCircle className='h-8 w-7'></TbUserCircle>
+                        <TbUserCircle className='h-8 w-7 dropdown dropdown-end'></TbUserCircle>
                             </NavLink>
-                          </li>
+                          </li> */}
+                          
+                  
+                   <div className="flex-none gap-2">
+                        <div className="dropdown dropdown-end">
+                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                               <div className="w-10 rounded-full"> 
+                                <TbUserCircle className='h-8 w-7'></TbUserCircle>
+                                </div> 
+                            </label>
+                            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow font-mono text-sm menu menu-sm dropdown-content bg-purple-900 text-white rounded-box w-52">
+                                <li><a>My added food items</a></li>
+                                <li><a>Add a food item</a></li>
+                                <li><a>My ordered food items</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                   </li>
            
                 </ul>
                
+
+
+            
+
+
+
+
+
                
                 {/* <li className="list-none">
               {user ? (
