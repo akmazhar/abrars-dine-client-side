@@ -1,9 +1,7 @@
-
-
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const SingleFood = () => {
+const Foods = () => {
     const [jsonData, setJsonData] = useState([]);
 
     useEffect(() => {
@@ -24,18 +22,16 @@ const SingleFood = () => {
                             className="object-cover w-full h-full"
                         />
                     </figure>
-                    <div className="card-body px-5 text-start gap-5 py-15 rounded-t-2xl shadow-2xl shadow-cyan-800">
+                    <div className="card-body px-5 text-center gap-5 py-15 bg-lime-100 rounded-t-2xl shadow-2xl shadow-cyan-800">
                         <div className="flex">
                             <div>
                                 <h2 className="font-bold text-pink-700 font-serif">{data.food_name}</h2>
-                                <p className="font-sans font-bold text-cyan-900">Category : {data.food_category}</p>
-                                <p className="font-mono text-blue-500">Origin : {data.food_origin}</p>
-                                <p className="font-sans text-yellow-700">Made By : {data.chef_name}</p>
-                                <p className="font-serif text-black">Origin : {data.food_description}</p>
-                                <h2 className="font-mono text-red-600 font-bold">Price : $ {data.price}</h2>
+                                <p className="font-sans font-bold text-black">Category : {data.food_category}</p>
+                                <p className="font-mono text-lime-700">Quantity : {data.food_quantity}</p>
+                                <h2 className="font-mono font-bold">Price : $ {data.price}</h2>
                                 <div className="btn-group btn-group-vertical mt-1 ml-12 space-y-3 justify-center">
-                                    <Link to={`/order`}>
-                                    <button className="btn rounded-e-3xl bg-green-600 text-white font-mono px-24">Order</button>
+                                    <Link to={`/singlefood`}>
+                                    <button className="btn rounded-b-3xl bg-red-600 text-white font-mono px-24">Details</button>
                                     </Link>
                                 </div>
                             </div>
@@ -47,4 +43,4 @@ const SingleFood = () => {
     );
 };
 
-export default SingleFood;
+export default Foods;
