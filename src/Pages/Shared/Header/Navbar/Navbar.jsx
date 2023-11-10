@@ -118,14 +118,27 @@ const Navbar = () => {
                                 </div> 
                             </label>
                             <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow font-mono text-sm menu menu-sm dropdown-content bg-purple-900 text-white rounded-box w-52">
-                            <li><a>My added food items</a></li>
+                            <Link to="/myAddedFood"><li><a>My added food items</a></li></Link>
                             <Link to="/addfood"><li><a>Add a food item</a></li></Link>
                                 <li><a>My ordered food items</a></li>
                             </ul>
                         </div>
                     </div>
-                   </li>
-           
+                    </li>
+                 
+
+
+
+                    <li>
+              <NavLink
+                to="/add"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "text-rose-600" : ""
+                }
+              >
+               Add
+              </NavLink>
+            </li>
                 </ul>
                
 

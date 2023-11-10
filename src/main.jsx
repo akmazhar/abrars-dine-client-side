@@ -25,6 +25,7 @@ import AddFood from './Pages/AddFood/AddFood';
 import UpdateFood from './Pages/UpdateFood/UpdateFood';
 import FoodCard from './Pages/FoodCard/FoodCard';
 import MyAddedFood from './Pages/MyAddedFood/MyAddedFood';
+import Add from './Pages/MyAddedFood/Add';
 // import Banner from './Pages/Shared/Banner/Banner';
 // import Navbar from './Pages/Shared/Header/Navbar/Navbar';
 // import Footer from './Pages/Shared/Footer/Footer';
@@ -103,9 +104,13 @@ const router = createBrowserRouter([
     element: <UpdateFood></UpdateFood>
   },
 
-   {
+  {
     path: "/myAddedFood",
     element: <MyAddedFood></MyAddedFood>
+  },
+  {
+    path: "/add",
+    element: <Add></Add>
   },
   // {
   //   path: "/footer",

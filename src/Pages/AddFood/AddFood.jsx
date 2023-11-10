@@ -15,30 +15,16 @@ const AddFood = () => {
         const price = form.price.value;
         const description = form.description.value;
         const image = form.image.value;
-        
-        const newFood = {name,  category, price, quantity, origin, description, image};
-        console.log(newFood);
-
-
-      //   const form = event.target;
-      //   const food_name = form.food_name.value;
-      //   const food_category = form.food_category.value;
-      //   const food_quantity = form.food_quantity.value;
-      //   const food_origin = form.food_origin.value;
-      //   const price = form.price.value;
-      //   const food_description = form.food_description.value;
-      //   const food_image = form.food_image.value;
-        
-      //   const newFood = {food_name, food_category, price, food_quantity, food_origin, food_description, food_image};
-      //   console.log(newFood);
+        const newAllFood = {name,  category, price, quantity, origin, description, image};
+        console.log(newAllFood);
 
         //send data to the server
-        fetch('http://localhost:5000/allfood', {
+        fetch('http://localhost:5000/myAddedFood', {
          method: 'POST',
          headers:  {
             'content-type':'application/json'
          },
-         body: JSON.stringify(newFood)
+         body: JSON.stringify(newAllFood)
         })
          .then(res =>res.json())
          .then(data => {

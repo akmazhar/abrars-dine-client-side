@@ -9,8 +9,7 @@ import { GoogleAuthProvider,
        } from 'firebase/auth';
 import { createContext, useEffect, useState } from 'react';
 import { auth } from '../firebase/firebase.config';
-import { PropTypes } from 'prop-types';
-
+import PropTypes from 'prop-types';
 
 
 
@@ -60,11 +59,16 @@ signInWithGoogle,
 logOut,
 };
 
-return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
+return (
+    
+<AuthContext.Provider value={authInfo}>
+    {children}</AuthContext.Provider>
+  );
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default AuthProvider;
 
-AuthProvider.PropTypes = {
-children: PropTypes.node,
-};
