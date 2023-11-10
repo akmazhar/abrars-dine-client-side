@@ -1,21 +1,36 @@
 import Swal from "sweetalert2";
 
+
+
 const AddFood = () => {
 
     const handleAddFood = event => {
         event.preventDefault();
         
         const form = event.target;
-        const food_name = form.food_name.value;
-        const food_category = form.food_category.value;
-        const food_quantity = form.food_quantity.value;
-        const food_origin = form.food_origin.value;
+        const name = form.name.value;
+        const category = form.category.value;
+        const quantity = form.quantity.value;
+        const origin = form.origin.value;
         const price = form.price.value;
-        const food_description = form.food_description.value;
-        const food_image = form.food_image.value;
+        const description = form.description.value;
+        const image = form.image.value;
         
-        const newFood = {food_name, food_category, price, food_quantity, food_origin, food_description, food_image};
+        const newFood = {name,  category, price, quantity, origin, description, image};
         console.log(newFood);
+
+
+      //   const form = event.target;
+      //   const food_name = form.food_name.value;
+      //   const food_category = form.food_category.value;
+      //   const food_quantity = form.food_quantity.value;
+      //   const food_origin = form.food_origin.value;
+      //   const price = form.price.value;
+      //   const food_description = form.food_description.value;
+      //   const food_image = form.food_image.value;
+        
+      //   const newFood = {food_name, food_category, price, food_quantity, food_origin, food_description, food_image};
+      //   console.log(newFood);
 
         //send data to the server
         fetch('http://localhost:5000/allfood', {
@@ -43,15 +58,19 @@ const AddFood = () => {
 
     return (
 
-        <div className="bg-[#0e0f0e]">
-
-             <div className="flex justify-center items-center text-center">
-             {/* <img className="justify-center items-center" src="/car.png" alt="" width={200}/> */}
-             <img className="justify-center items-center " src="https://i.ibb.co/3vdvt4k/1.png" alt="" width={1250}/>
+        <div className="bg-black">
+             
+             {/* <div className="flex justify-center items-center text-center"> */}
+             <div className="items-center justify-center">
+            <video autoPlay muted loop className="video w-full h-1/3 ">
+            <source src="/add.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+            </video>
+             {/* <img className="justify-center items-center " src="https://i.ibb.co/3vdvt4k/1.png" alt="" width={1250}/> */}
              </div>
 
-        <form className="p-40 rounded-t-full rounded-b-full bg-lime-100" onSubmit={handleAddFood}>
-       <h1 className='text-4xl text-center font-extrabold font-mono mb-10 p-3 text-blue-700'>Add Your Food<span className='text-red-500 font-semibold font-serif'> : Globally Delicious.</span></h1>
+        <form className="p-40 rounded-t-full rounded-b-full bg-cyan-500" onSubmit={handleAddFood}>
+       <h1 className='text-4xl text-center font-extrabold font-mono mb-10 p-3 text-white'>Add Your Food<span className='text-yellow-900 font-semibold font-serif'> : Globally Delicious.</span></h1>
         <div className="md:flex gap-2 justify-center mb-5">
         <div className="form-control md:w-1/2">
             <label className="label">
@@ -68,7 +87,7 @@ const AddFood = () => {
               <span className="label-text font-semibold font-serif text-lg">Category</span>
                     </label>
                     <label className="input-group">
-             <input type="category" name="type" placeholder="Mention the Category Name" className="input input-bordered w-full" />
+             <input type="category" name="category" placeholder="Mention the Category Name" className="input input-bordered w-full" />
           </label>
        </div> 
         </div>
@@ -81,7 +100,7 @@ const AddFood = () => {
               <span className="label-text font-semibold font-serif text-lg">Short Description</span>
                     </label>
                     <label className="input-group">
-             <input type="shortDescription" name="shortDescription" placeholder="Description of Food"  className="input input-bordered w-full" />
+             <input type="description" name="description" placeholder="Description of Food"  className="input input-bordered w-full" />
           </label>
        </div>
         </div>
@@ -132,7 +151,7 @@ const AddFood = () => {
           </label>
        </div>
       </div>
-      <input type="submit" value="Add & Pick Your Delicious Food" className="btn btn-block bg-[#652525] text-white text-xl p-3 mt-5 font-mono rounded-lg" />
+      <input type="submit" value="Add & Pick Your Delicious Food" className="btn btn-block px-3 bg-red-600 text-white text-xl mt-5 font-mono rounded-lg" />
       </form> 
       </div>
     );
