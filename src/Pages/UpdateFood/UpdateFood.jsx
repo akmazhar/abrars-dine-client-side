@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 
 
 
+
 const UpdateFood = () => {
   const dish = useLoaderData();
   const { name, category, origin, price, image } = dish;
@@ -46,15 +47,17 @@ const UpdateFood = () => {
 
  
    return (
-       <div className="bg-[#e2c9da] p-40">
+       <div className="bg-[#1e7f8c]">
              
-       <div className="flex justify-center items-center text-center mb-5">
-       {/* <h1 className='text-3xl text-center font-extrabold font-mono p-3 ml-40 text-green-600'>Update Your Car<span className='text-orange-950 font-semibold font-serif'> : Smartly</span></h1> */}
-       {/* <img className="justify-center items-center" src="/c.png" alt="" width={80}/> */}
-       <img className="justify-center items-center" src="https://i.ibb.co/S6bw72J/1.jpg" alt="" width={1250}/>
-       </div>
+             <div className="items-center justify-center">
+            <video autoPlay muted loop className="video w-full ">
+            <source src="/2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+            </video>
+            </div>
      
-       <form onSubmit={handleUpdateFood}> 
+       <form className="p-40 rounded-s-full rounded-b-full bg-yellow-200" onSubmit={handleUpdateFood}> 
+       <h1 className='text-4xl text-center font-extrabold font-serif mb-10 p-3 text-green-700'>Update Your <span className='text-yellow-900 font-semibold font-serif'> : Food Dish</span></h1>
 
        <div className="md:flex gap-2 justify-center mb-5">
        <div className="form-control md:w-1/2">
@@ -112,7 +115,7 @@ const UpdateFood = () => {
        </div>
    
        
-      <input origin="submit" value="Update Your Test" className="btn btn-block bg-[#383edf] text-white text-xl p-3 mt-5 font-mono rounded-lg" />
+      <input type="submit" value="Update Your Test" className="btn btn-block rounded-s-full rounded-e-2xl bg-[#138b06] text-white text-xl p-3 mt-2 font-mono rounded-lg" />
        </form>
        
        </div>

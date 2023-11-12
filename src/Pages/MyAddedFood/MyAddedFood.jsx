@@ -29,11 +29,11 @@ const MyAddedFood = () => {
 
 
 
-<div className="card card-side mb-2 mt-20 ml-52 mr-40 shadow-2xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
-      <figure className="ml-3">
+<div className="card card-side mb-2 mt-5 ml-52 mr-40 shadow-2xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+      <figure className="ml-3 mt-2">
         <img className="rounded-e-3xl rounded-s-3xl mr-4" src={item.image} alt="image" />
       </figure>
-      <div className="card-body  bg-yellow-200 px-10 py-5 rounded-s-3xl shadow-inner shadow-lime-700">
+      <div className="card-body  bg-blue-200 px-10 py-5 ml-3 mt-2 rounded-s-3xl shadow-inner shadow-lime-700">
         <div className="grid">
           
            
@@ -46,7 +46,7 @@ const MyAddedFood = () => {
           </div>
        <div className="btn-group btn-group-vertical mt-1 ml-12 space-y-3 justify-end">
             
-            <Link to={`/updateFood/${_id}`}><button className="btn bg-cyan-600 mr-92 shadow-black text-white font-mono border-yellow-700 border-spacing-5">Update</button></Link>
+            <Link to={`/UpdateFood`}><button className="btn bg-cyan-600 ml-28 mr-28 px-16 shadow-black text-white font-mono border-yellow-700 border-spacing-5">Update</button></Link>
                </div>
              </div>
              </div>
