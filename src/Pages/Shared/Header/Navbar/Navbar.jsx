@@ -13,7 +13,7 @@ const Navbar = () => {
 
 
   const {user, logOut} = useContext(AuthContext)
-  console.log(user);
+  // console.log(user);
   const handleLogout = () => {
     logOut()
         .then(() => {
@@ -63,16 +63,7 @@ const Navbar = () => {
                Blog 
               </NavLink>
             </li>
-            {/* <li>
-              <NavLink
-                to="/userProfile"
-                className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "text-rose-600" : ""
-                              }
-                            >
-                          User Profile
-                            </NavLink>
-                          </li> */}
+
                     {
                        user ?  <li>
                         <NavLink
@@ -95,21 +86,8 @@ const Navbar = () => {
                         Login
                       </NavLink>
                       </li>
-
                       }
-
-               <li >
-              {/* <NavLink
-                to="/userProfile"
-                className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "text-rose-600" : ""
-                              }
-                            >
-                        <TbUserCircle className='h-8 w-7 dropdown dropdown-end'></TbUserCircle>
-                            </NavLink>
-                          </li> */}
-                          
-                  
+               <li > 
                    <div className="flex-none gap-2">
                         <div className="dropdown dropdown-end">
                             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -125,62 +103,8 @@ const Navbar = () => {
                         </div>
                     </div>
                     </li>
-                 
-
-
-
-                    <li>
-              <NavLink
-                to="/add"
-                className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "text-rose-600" : ""
-                }
-              >
-               Add
-              </NavLink>
-            </li>
                 </ul>
-               
-
-
-            
-
-
-
-
-
-               
-                {/* <li className="list-none">
-              {user ? (
-              <div className="md:flex gap-2 text-right">
-
-              <button onClick={logOut} className=" bg-black border-black h-15">
-              <Link to={"/login"}><img className="bg-black  h-15"  src="https://i.ibb.co/BBQQ9mr/loOUT.png" alt="" /></Link>
-              </button>
-              </div>
-              ) : (
-              <button className="btn bg-black  h-15">
-              <Link to={"/login"}><img className="bg-black border-black h-15" src="https://i.ibb.co/3m1vZ8F/log.png" alt="" /></Link>
-              </button>
-              )}
-              </li> */}
-
-              
-             
-                  {/* <details>
-                <summary>Parent</summary>
-                <ul className="p-2">
-                  <li><a>Submenu 1</a></li>
-                  <li><a>Submenu 2</a></li>
-                </ul>
-              </details>
-              <div className="navbar-end">
-          <a className="btn">Button</a>
-        </div> */}
-
-
                 </div>
-                
               </nav>
             </div>
           );

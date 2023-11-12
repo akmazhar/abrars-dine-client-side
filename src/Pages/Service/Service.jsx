@@ -21,7 +21,7 @@ const Service = () => {
         <div>
             <div className="text-center mt-4 bg-lime-100">
             <h3 className="font-bold text-4xl mb-1"> Choose Your <span className="text-red-600">Mouth-Watering</span> <span className="text-green-600">Delicious Food</span> </h3>
-            <p className="font-mono text-2xl shadow-2xl">Category Based Global Food Item</p>
+            <p className="font-mono text-2xl shadow-2xl">Top Rated Based Global Food Item</p>
             </div>
             <div data-aos="fade-up" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 aos-init aos-animate mx-auto w-full p-5 gap-4 lg:-top-20 shadow-3xl shadow-lime-400 bg-lime-100">
            

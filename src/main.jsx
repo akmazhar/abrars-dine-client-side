@@ -26,6 +26,7 @@ import UpdateFood from './Pages/UpdateFood/UpdateFood';
 import FoodCard from './Pages/FoodCard/FoodCard';
 import MyAddedFood from './Pages/MyAddedFood/MyAddedFood';
 import Add from './Pages/MyAddedFood/Add';
+import Details from './Pages/AllFood/Details';
 // import Banner from './Pages/Shared/Banner/Banner';
 // import Navbar from './Pages/Shared/Header/Navbar/Navbar';
 // import Footer from './Pages/Shared/Footer/Footer';
@@ -101,29 +102,24 @@ const router = createBrowserRouter([
   },
   {
     path: "/updateFood",
-    element: <UpdateFood></UpdateFood>
+    element: <UpdateFood></UpdateFood>,
+    loader: ({params}) => fetch(`http://localhost:5000/updateFood/${params.id}`) 
   },
 
   {
     path: "/myAddedFood",
     element: <MyAddedFood></MyAddedFood>
   },
+  
   {
     path: "/add",
     element: <Add></Add>
   },
-  // {
-  //   path: "/footer",
-  //   element: <Footer></Footer>
-  // },
-  // {
-  //   path: "/banner",
-  //   element: <Banner></Banner>
-  // },
-  // {
-  //   path: "/logo",
-  //   element: <Logo></Logo>
-  // },
+  {
+    path: "/details/:id",
+    element: <Details></Details>
+  },
+ 
 
   ]
   },

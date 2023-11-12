@@ -1,34 +1,33 @@
 import { useLoaderData } from "react-router-dom";
-
+import Swal from "sweetalert2";
 
 
 
 
 const UpdateFood = () => {
-  const car = useLoaderData();
-  const { _id, name, brandName, rating, price, type, image } = car;
+  const dish = useLoaderData();
+  const { name, category, origin, price, image } = dish;
 
-  const handleUpdateProduct = (event) => {
+  const handleUpdateFood = (event) => {
     event.preventDefault();
 
     const form = event.target;
     const name = form.name.value;
-    const type = form.type.value;
-    const rating = form.rating.value;
+    const origin = form.origin.value;
     const price = form.price.value;
-    const brandName = form.brandName.value;
+    const category = form.category.value;
     const image = form.image.value;
 
-    const updatedCar = { name, brandName, rating, price, type, image };
-    console.log(updatedCar);
+    const updatedFood = { name, category, origin, price, image };
+    console.log(updatedFood);
 
-    //send data to the server
-    fetch(`https://abrars-automobile-server.vercel.app/product/${_id}`, {
+    // send data to the server
+    fetch(`http://localhost:5000/updateFood/${_id}`, {
       method: 'PUT',
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json' // Corrected typo in 'content-origin'
       },
-      body: JSON.stringify(updatedCar)
+      body: JSON.stringify(updatedFood)
     })
       .then(res => res.json())
       .then(data => {
@@ -36,13 +35,14 @@ const UpdateFood = () => {
         if (data.modifiedCount > 0) {
           Swal.fire({
             title: 'Success!',
-            text: 'Your Car Requirement is Updated',
+            text: 'Your Food Requirement is Updated',
             icon: 'success',
             confirmButtonText: 'Thank You!'
           });
         }
       });
   };
+
 
  
    return (
@@ -54,57 +54,48 @@ const UpdateFood = () => {
        <img className="justify-center items-center" src="https://i.ibb.co/S6bw72J/1.jpg" alt="" width={1250}/>
        </div>
      
-       <form onSubmit={handleUpdateProduct}> 
+       <form onSubmit={handleUpdateFood}> 
 
        <div className="md:flex gap-2 justify-center mb-5">
        <div className="form-control md:w-1/2">
        <label className="label">
-        <span className="label-text font-semibold font-serif text-lg">Name of Car</span>
+        <span className="label-text font-semibold font-serif text-lg">Name of Food</span>
               </label>
               <label className="input-group">
-       <input type="text" name="name" defaultValue={name} placeholder="Car Name" className="input input-bordered w-full" />
+       <input origin="text" name="name" defaultValue={name} placeholder="Food Name" className="input input-bordered w-full" />
        </label>
        </div>
 
 
        <div className="form-control md:w-1/2">
        <label className="label">
-        <span className="label-text font-semibold font-serif text-lg">Brand Name</span>
+        <span className="label-text font-semibold font-serif text-lg">Food Category</span>
               </label>
               <label className="input-group">
-       <input type="text" name="brandName" defaultValue={brandName} placeholder="Mention the Brand Name" className="input input-bordered w-full" />
+       <input origin="text" name="category" defaultValue={category} placeholder="Mention the Category Name" className="input input-bordered w-full" />
        </label>
        </div>
-       
-       <div className="form-control md:w-1/2 ml-4">
-           <label className="label">
-             <span className="label-text font-semibold font-serif text-lg">Type</span>
-                   </label>
-                   <label className="input-group">
-            <input type="model" name="type" defaultValue={type} placeholder="Car Model Name" className="input input-bordered w-full" />
-         </label>
-      </div> 
        </div>
 
       
        <div className="md:flex gap-2 justify-center mb-5">
-       <div className="form-control md:w-1/2">
-           <label className="label">
-             <span className="label-text font-semibold font-serif text-lg">Rating</span>
-                   </label>
-                   <label className="input-group">
-            <input type="rating" name="rating" defaultValue={rating} placeholder="Put Your Rating, Please" className="input input-bordered w-full" />
-         </label>
-      </div>
-
       <div className="form-control md:w-1/2 ml-4">
            <label className="label">
              <span className="label-text font-semibold font-serif text-lg">Price</span>
                    </label>
                    <label className="input-group">
-            <input type="price" name="price" defaultValue={price} placeholder="Price" className="input input-bordered w-full" />
+            <input origin="price" name="price" defaultValue={price} placeholder="Your Required Price" className="input input-bordered w-full" />
          </label>
       </div>
+
+      <div className="form-control md:w-1/2 ml-4">
+           <label className="label">
+             <span className="label-text font-semibold font-serif text-lg">Origin</span>
+                   </label>
+                   <label className="input-group">
+            <input origin="origin" name="origin" defaultValue={origin} placeholder="Food Origin Name" className="input input-bordered w-full" />
+         </label>
+      </div> 
        </div>
     
      
@@ -114,14 +105,14 @@ const UpdateFood = () => {
              <span className="label-text font-semibold font-serif text-lg">Image</span>
                    </label>
                    <label className="input-group">
-            <input type="photo" name="image" defaultValue={image} placeholder="Paste Image URL" className="input input-bordered w-full" />
+            <input origin="photo" name="image" defaultValue={image} placeholder="Paste Image URL" className="input input-bordered w-full" />
          </label>
       </div>
 
        </div>
    
        
-      <input type="submit" value="Update Your Car" className="btn btn-block bg-[#383edf] text-white text-xl p-3 mt-5 font-mono rounded-lg" />
+      <input origin="submit" value="Update Your Test" className="btn btn-block bg-[#383edf] text-white text-xl p-3 mt-5 font-mono rounded-lg" />
        </form>
        
        </div>

@@ -1,38 +1,77 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Foods = () => {
-    const [jsonData, setJsonData] = useState([]);
+    const [data, setdata] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/allfood')
-            .then((response) => response.json())
-            .then((data) => setJsonData(data))
-            .catch((error) => console.error('Error fetching data:', error));
+        fetch('http://localhost:5000/dish')
+            .then((res) => res.json())
+            .then((data) => setdata(data))
+            .catch((error) => console.error(error));
     }, []);
-
+    console.log(data)
+    const oneCart = {
+      image: data.image,
+      name: data.name,
+      category: data.category,
+      chef: data.chef,
+      price: data.price,
+      quantity: data.quantity,
+      origin: data.origin,
+      description: data.description,
+    };
+    const myOrderHandle = () => {
+        fetch("http://localhost:5000/myOrder", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(oneCart),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.insertedId) {
+              Swal.fire({
+                title: "Success!",
+                text: "Your Appetizing is selected",
+                icon: "success",
+                confirmButtonText: "Thank You!",
+              });
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      };
     return (
-        <div className="card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-screen-xl mx-auto my-5">
-            {jsonData.map((data, index) => (
-                <div key={index} className="card w-96 bg-base-100 shadow-xl rounded-2xl">
-                    <figure className="h-60 overflow-hidden rounded-t-2xl">
+        <div className="card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-screen-xl mx-auto bg-slate-900">
+            {data.map((data, index) => (
+                <div key={index} className="card w-96 bg-base-200 shadow-xl rounded-2xl">
+                    <figure className="h-60 overflow-hidden rounded-e-3xl rounded-s-3xl">
                         <img
-                            src={data.food_image}
+                            src={data.image}
                             alt=""
                             className="object-cover w-full h-full"
                         />
                     </figure>
-                    <div className="card-body px-5 text-center gap-5 py-15 bg-lime-100 rounded-t-2xl shadow-2xl shadow-cyan-800">
+                    <div className="card-body rounded-s-3xl shadow-red-700 px-2 text-center gap-5 py-4 bg-cyan-300 rounded-t-2xl shadow-inner">
                         <div className="flex">
                             <div>
-                                <h2 className="font-bold text-pink-700 font-serif">{data.food_name}</h2>
-                                <p className="font-sans font-bold text-black">Category : {data.food_category}</p>
-                                <p className="font-mono text-lime-700">Quantity : {data.food_quantity}</p>
-                                <h2 className="font-mono font-bold">Price : $ {data.price}</h2>
-                                <div className="btn-group btn-group-vertical mt-1 ml-12 space-y-3 justify-center">
-                                    <Link to={`/singlefood`}>
-                                    <button className="btn rounded-b-3xl bg-red-600 text-white font-mono px-24">Details</button>
-                                    </Link>
+                            <h2 className="card-title text-orange-950 text-start font-serif">{data.name}</h2>
+            <p className="font-mono font-bold text-pink-700 text-start">{data.category}</p>
+            <p className="font-mono text-start">Made By: {data.chef}</p>
+            <p className="font-serif text-start">Quantity : {data.quantity}</p>
+            <h2 className="font-mono font-medium text-start">Price: {data.price}</h2>
+            <p className="font-sans text-yellow-950 font-semibold text-start">Brief: {data.description}</p> 
+                                <div className="btn-group btn-group-vertical mt-1 ml-5 mr-5 px-24 space-y-3 justify-center">
+                                <button
+              onClick={myOrderHandle}
+              className="btn bg-pink-600 shadow-amber-600 text-white font-mono border-black border-spacing-8 px-14"
+            >
+              Order
+            </button>
                                 </div>
                             </div>
                         </div>
