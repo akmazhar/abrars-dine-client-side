@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -117,7 +118,9 @@ const UpdateFood = () => {
        
       <input type="submit" value="Update Your Test" className="btn btn-block rounded-s-full rounded-e-2xl bg-[#138b06] text-white text-xl p-3 mt-2 font-mono rounded-lg" />
        </form>
-       
+       <Helmet>
+          <title>Abrar's Dine | Update Food </title>
+        </Helmet>
        </div>
        );
        };

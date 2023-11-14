@@ -1,4 +1,6 @@
+import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
+
 
 
 
@@ -55,8 +57,8 @@ const AddFood = () => {
              {/* <img className="justify-center items-center " src="https://i.ibb.co/3vdvt4k/1.png" alt="" width={1250}/> */}
              </div>
 
-        <form className="p-40 rounded-t-full rounded-b-full bg-cyan-500" onSubmit={handleAddFood}>
-       <h1 className='text-4xl text-center font-extrabold font-mono mb-10 p-3 text-white'>Add Your Food<span className='text-yellow-900 font-semibold font-serif'> : Globally Delicious.</span></h1>
+        <form className="p-40 rounded-t-full rounded-b-full bg-cyan-700" onSubmit={handleAddFood}>
+       <h1 className='text-4xl text-center font-extrabold font-mono mb-10 p-3 text-white'>Add Your Food<span className='text-yellow-400 font-semibold font-serif'> : Globally Delicious.</span></h1>
         <div className="md:flex gap-2 justify-center mb-5">
         <div className="form-control md:w-1/2">
             <label className="label">
@@ -137,8 +139,11 @@ const AddFood = () => {
           </label>
        </div>
       </div>
-      <input type="submit" value="Add & Pick Your Delicious Food" className="btn btn-block px-3 bg-red-600 text-white text-xl mt-5 font-mono rounded-lg" />
+      <input type="submit" value="Add & Pick Your Delicious Food" className="btn btn-block px-3 bg-green-800 text-white text-xl mt-5 font-mono rounded-lg" />
       </form> 
+      <Helmet>
+          <title>Abrar's Dine | Add Food</title>
+        </Helmet>
       </div>
     );
 };

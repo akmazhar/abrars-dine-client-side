@@ -1,102 +1,71 @@
-import { useEffect } from "react";
-import { useState } from "react";
-import { Link, useLoaderData, useLocation } from "react-router-dom";
-import Foods from "../AllFood/Foods";
+import { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
 
-
-
-
-// const AllFood = () => {
-const Pagination = () => {    
-  const [allFood, setAllFood] = useState([]);
+const Pagination = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 9;
-  const location = useLocation();
-  const apiItem = useLoaderData();
+  const [itemsPerPage, setItemsPerPage] = useState(9);
+  const [data, setData] = useState([]);
+  const { count } = useLoaderData();
+  const numberOfPages = Math.ceil(count / itemsPerPage);
+  const pages = [...Array(numberOfPages).keys()];
 
   useEffect(() => {
-    setAllFood(apiItem);
-  }, [apiItem]);
+    fetch(`http://localhost:5000/count?_page=${currentPage}&_limit=${itemsPerPage}`)
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((error) => console.error(error));
+  }, [currentPage, itemsPerPage]);
+  
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    const inputValue = e.target.text.value;
-    const dataResult = apiItem.filter((data) => data.food_name === inputValue);
-    setAllFood(dataResult);
+  const handleItemsPerPage = (e) => {
+    const val = parseInt(e.target.value);
+    setItemsPerPage(val);
+    setCurrentPage(1); // Reset to the first page when changing items per page
   };
 
-  // Logic for displaying current cards
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = allFood.slice(indexOfFirstItem, indexOfLastItem);
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
-  // Logic for displaying page numbers
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(allFood.length / itemsPerPage); i++) {
-    pageNumbers.push(i);
-  }
+  const handleNextPage = () => {
+    if (currentPage < numberOfPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <div>
-      {/* Pagination buttons */}
-      <div className="join grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        <button
-          className="join-item btn btn-outline"
-          onClick={() => setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous page
+     <div className="pagination">
+        <p>current page: {currentPage}</p>
+        <button onClick={handlePrevPage} disabled={currentPage === 1}>
+          Prev
         </button>
-        <button
-          className="join-item btn btn-outline"
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === pageNumbers.length}
-        >
+        {pages.map((page) => (
+          <button
+            className={currentPage === page + 1 ? "selected" : ""}
+            onClick={() => setCurrentPage(page + 1)}
+            key={page}
+          >
+            {page + 1}
+          </button>
+        ))}
+        <button onClick={handleNextPage} disabled={currentPage === numberOfPages}>
           Next
         </button>
-      </div>
+        <select value={itemsPerPage} onChange={handleItemsPerPage} name="" id="">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+        </select>
+      </div> 
 
-      {/* Search bar */}
-      <form onSubmit={handleSearch} className="flex justify-center items-center">
-        <input
-          type="text"
-          placeholder="Search by Food Name..."
-          name="text"
-          className="input input-bordered rounded-tr-none rounded-br-none md:w-[470px] p-3 mt-60 rounded-t-xl px-7 from-neutral-500"
-        />
-        <input
-          className="btn bg-[rgb(241,59,59)] mt-60 p-3 text-white rounded-tl-none rounded-bl-none rounded-xl px-7 font-medium"
-          type="submit"
-          value="Search"
-        />
-      </form>
+    </div> 
+   
 
-      {/* Displaying current cards */}
-      <div className="text-center mt-4 bg-lime-100">
-        <div
-          data-aos="fade-up"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 aos-init aos-animate mx-auto w-full p-5 gap-4 lg:-top-20 shadow-3xl shadow-lime-400 bg-lime-100"
-        >
-          {currentItems.map((item) => (
-            <Foods key={item._id} allfood={item} />
-          ))}
-        </div>
-        <div className="text-center">
-          <Link to={location.pathname}>
-            <button className="btn btn-outline text-red bg-red-600 text-white mr-5 mb-2 mt-2 px-16 rounded-e-full rounded-s-full">
-              See All
-            </button>
-          </Link>
-        </div>
-      </div>
-    </div>
-//   );
-// };
-
-// export default AllFood;
-
-    );
+  );
 };
 
 export default Pagination;

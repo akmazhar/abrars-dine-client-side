@@ -9,6 +9,7 @@ import { TbUserCircle } from "react-icons/tb";
 
 
 
+
 const Navbar = () => {
 
 
@@ -95,15 +96,17 @@ const Navbar = () => {
                                 <TbUserCircle className='h-8 w-7'></TbUserCircle>
                                 </div> 
                             </label>
-                            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow font-mono text-sm menu menu-sm dropdown-content bg-purple-900 text-white rounded-box w-52">
-                            <Link to="/myAddedFood"><li><a>My added food items</a></li></Link>
-                            <Link to="/addfood"><li><a>Add a food item</a></li></Link>
-                                <li><a>My ordered food items</a></li>
+                            <ul tabIndex={0} className="ml-2 z-[2] p-2 shadow font-serif text-lg menu menu-sm dropdown-content bg-lime-100 rounded-b-full rounded-s-full text-white rounded-box w-64">
+                            <Link to="/myAddedFood"><li className='text-green-600'><a>My Added Food Items</a></li></Link>
+                            <Link to="/addfood"><li><a className='text-blue-600'>Add a Food Item</a></li></Link>
+                                <Link to="/myOrder"><li><a className='text-red-600'>My Ordered Food Items</a></li></Link>
+                                {/* <Link to="/pagination"><li><a className='text-black'>Pagination</a></li></Link> */}
                             </ul>
                         </div>
                     </div>
                     </li>
                 </ul>
+       
                 </div>
               </nav>
             </div>

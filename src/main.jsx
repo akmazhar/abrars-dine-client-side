@@ -15,23 +15,25 @@ import Register from './Pages/Register/Register';
 import Login from './Pages/Login/Login';
 import Blog from './Pages/Blog/Blog';
 import AllFood from './Pages/AllFood/AllFood';
-import EachCard from './Pages/EachCard/EachCard';
-import FoodPurchase from './Pages/FoodPurchase/FoodPurchase';
 import MyOrder from './Pages/MyOrder/MyOrder';
-import Pagination from './Pages/Pagination/Pagination';
-import SearchFunctionality from './Pages/SearchFunctionality/SearchFunctionality';
-import SingleFood from './Pages/SingleFood/SingleFood';
-import AddFood from './Pages/AddFood/AddFood';
 import UpdateFood from './Pages/UpdateFood/UpdateFood';
-import FoodCard from './Pages/FoodCard/FoodCard';
 import MyAddedFood from './Pages/MyAddedFood/MyAddedFood';
-import Add from './Pages/MyAddedFood/Add';
 import Details from './Pages/AllFood/Details';
+import PrivetRoute from './Router/PrivetRoute';
+import FoodPurchase from './Pages/FoodPurchase/FoodPurchase';
+import AddFood from './Pages/AddFood/AddFood';
+// import Add from './Pages/MyAddedFood/Add';
 // import Banner from './Pages/Shared/Banner/Banner';
 // import Navbar from './Pages/Shared/Header/Navbar/Navbar';
 // import Footer from './Pages/Shared/Footer/Footer';
 // import Logo from './Pages/Shared/Header/Logo/Logo';
+// import FoodCard from './Pages/FoodCard/FoodCard';
+// import PrivetRoute from './Router/PrivetRoute';
+// import Pagination from './Pages/Pagination/Pagination';
+// import SearchFunctionality from './Pages/SearchFunctionality/SearchFunctionality';
+// import SingleFood from './Pages/SingleFood/SingleFood';
 
+// import EachCard from './Pages/EachCard/EachCard';
 
 
 
@@ -57,10 +59,6 @@ const router = createBrowserRouter([
     element: <Login></Login>
   },
   {
-    path: "/addFood",
-    element: <AddFood>,</AddFood>
-  },
-  {
     path: "/allFood",
     element: <AllFood></AllFood>
   },
@@ -69,58 +67,66 @@ const router = createBrowserRouter([
     element: <Blog></Blog>
   },
   {
-    path: "/eachCard",
-    element: <EachCard></EachCard>
-  },
-  {
-    path: "/foodCard",
-    element: <FoodCard></FoodCard>
-  },
-  {
-    path: "/foodPurchase",
-    element: <FoodPurchase></FoodPurchase>
-  },
-  {
     path: "/myOrder",
-    element: <MyOrder></MyOrder>
-    // loader: ({params}) => fetch(`http://localhost:5000/myOrder/${params.id}`) 
+    element: <PrivetRoute><MyOrder></MyOrder></PrivetRoute>
   },
   {
     path: "/userProfile",
     element: <UserProfile></UserProfile>
   },
   {
-    path: "/pagination",
-    element: <Pagination></Pagination>
-  },
-  {
-    path: "/searchFunctionality",
-    element: <SearchFunctionality></SearchFunctionality>
-  },
-  {
-    path: "/singleFood",
-    element: <SingleFood></SingleFood>
-  },
-  {
     path: "/updateFood",
-    element: <UpdateFood></UpdateFood>,
+    element: <PrivetRoute><UpdateFood></UpdateFood></PrivetRoute>,
     loader: ({params}) => fetch(`http://localhost:5000/updateFood/${params.id}`) 
   },
 
   {
     path: "/myAddedFood",
-    element: <MyAddedFood></MyAddedFood>
-  },
-  
-  {
-    path: "/add",
-    element: <Add></Add>
+    element:<PrivetRoute><MyAddedFood></MyAddedFood></PrivetRoute>
   },
   {
     path: "/details/:id",
     element: <Details></Details>
   },
+   {
+    path: "/foodPurchase",
+    element: <FoodPurchase></FoodPurchase>,
+    loader: ({params}) => fetch(`http://localhost:5000/foodPurchase/${params.id}`) 
+  },
+  {
+    path: "/addFood",
+    element: <AddFood>,</AddFood>
+  },
+
+  // {
+  //   path: "/eachCard",
+  //   element: <EachCard></EachCard>
+  // },
+  // {
+  //   path: "/foodCard",
+  //   element: <FoodCard></FoodCard>
+  // },
+
+
+  // {
+  //   path: "/pagination",
+  //   element: <Pagination></Pagination>
+  //   loader: ({currentPage, itemsPerPage}) => fetch(`http://localhost:5000/count?_page=${currentPage}&_limit=${itemsPerPage}`)
+  // },
+  // {
+  //   path: "/searchFunctionality",
+  //   element: <SearchFunctionality></SearchFunctionality>
+  // },
+  // {
+  //   path: "/singleFood",
+  //   element: <SingleFood></SingleFood>
+  // },
  
+  
+  // {
+  //   path: "/add",
+  //   element: <Add></Add>
+  // },
 
   ]
   },

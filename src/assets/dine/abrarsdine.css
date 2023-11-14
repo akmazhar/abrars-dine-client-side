@@ -1,0 +1,36 @@
+.pagination{
+    text-align: center;
+    margin-bottom: 40px;
+}
+.pagination button{
+    margin-right: 10px;
+}
+.pagination .selected {
+    background-color: brown;
+}
+
+.image-slider {
+    position: relative;
+    width: 80%;
+    margin: auto;
+  }
+  
+  .image-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .resizer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background-color: #333;
+    cursor: ew-resize;
+  }
+  
+  .slider {
+    width: 100%;
+    margin-top: 10px;
+  }
+  

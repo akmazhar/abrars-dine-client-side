@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Details = () => {
@@ -59,12 +60,6 @@ const Details = () => {
       <div className="card-body  bg-yellow-200 px-10 py-5 rounded-s-3xl shadow-inner shadow-lime-700">
         <div className="grid">
           <div>
-            {/* <h2 className="card-title text-orange-950 font-serif">Name: {jsonData.name}</h2>
-            <p className="font-mono font-bold text-pink-700">Category: {jsonData.category}</p>
-            <p className="font-mono">Made By: {jsonData.chef}</p>
-            <p className="font-serif">Quantity : {jsonData.quantity}</p>
-            <h2 className="font-mono font-medium">Price: {jsonData.price}</h2>
-            <p className="font-sans text-yellow-950 font-semibold">In Short: {jsonData.description}</p> */}
               <h2 className="font-bold text-pink-700 font-serif">{jsonData.name}</h2>
             <p className="font-sans font-bold text-cyan-900">Category : {jsonData.category}</p>
             <p className="font-mono text-blue-700">Origin : {jsonData.origin}</p>
@@ -73,15 +68,18 @@ const Details = () => {
             <h2 className="font-mono text-red-600 font-bold">Price : $ {jsonData.price}</h2>
           </div>
           <div className="btn-group btn-group-vertical mt-10  space-y-2 justify-end">
-            <button
-              onClick={myOrderHandle}
+          <Link to="/myOrder"><button
+              onClick={myOrderHandle} 
               className="btn bg-green-800 mr-92 shadow-amber-600 text-white font-mono border-red-600 border-spacing-8 px-10"
             >
               Order
-            </button>
+            </button></Link>
           </div>
         </div>
       </div>
+      <Helmet>
+          <title>Abrar's Dine | Single Food Details </title>
+        </Helmet>
     </div>
   );
 };

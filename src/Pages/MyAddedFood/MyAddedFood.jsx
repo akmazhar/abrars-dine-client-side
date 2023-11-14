@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 
 
@@ -23,6 +24,9 @@ const MyAddedFood = () => {
   return (
 
     <div>
+
+     <img className="shadow-2xl" src="https://i.ibb.co/r6KQ26k/pol.png" alt="" />
+
       {
       dataApi.map(item => <div key={item._id}> 
   
@@ -52,6 +56,11 @@ const MyAddedFood = () => {
              </div>
       </div>)
       }
+         <div>
+         <Helmet>
+          <title>Abrar's Dine | My Added Food</title>
+        </Helmet>
+         </div>
     </div>
   );
 };

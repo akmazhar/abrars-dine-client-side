@@ -11,7 +11,7 @@ const FoodCard = ({ service }) => {
                 <h2 className="card-title font-sans font-bold text-blue-600">{name}</h2>
                 <h3 className="px-8 font-semibold text-slate-400" ><i className="text-red-600 text-xl font-mono">{category} Food</i></h3>
                 <p className="px-8 font-semibold text-black font-sans">Price: <span className="text-violet-800">$ {price}</span></p>
-                <div className="card-actions justify-end">
+                <div className="card-actions justify-start">
                 <Link to={`/details/${_id}`}> <button className="btn bg-green-600 text-white px-14">Details</button></Link>
                 </div>
             </div>

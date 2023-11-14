@@ -11,16 +11,17 @@ const Footer = () => {
 
   </aside> 
   <nav>
-    <header className="footer-title  text-white">About</header> 
+    <header className="footer-title  text-white">About</header>
     <a className="link link-hover">Home</a> 
-    <a className="link link-hover">Service</a> 
     <a className="link link-hover">Contact</a> 
-    <a className="link link-hover">Why Abrar's Dine</a> 
+    <a href='https://akmazhar2475.hashnode.dev/' className="link link-hover">Why Abrar's Dine</a> 
   </nav> 
+  
   <nav>
   <header className="footer-title  text-white">Support</header> 
     <a className="link link-hover">Support Center</a> 
     <a className="link link-hover">Feedback</a> 
+    <a className="link link-hover">Service</a>
     <a className="link link-hover">Accessibilty</a> 
   </nav> 
   <nav>
