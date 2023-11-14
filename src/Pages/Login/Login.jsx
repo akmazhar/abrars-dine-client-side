@@ -6,6 +6,7 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../../firebase/firebase.config';
 import { FcGoogle } from "react-icons/fc";
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet';
 
 
 const Login = () => {
@@ -160,6 +161,11 @@ return (
             {success && <p className="text-green-700">{success}</p>}
           </div>
         </div>
+        <div>
+         <Helmet>
+          <title>Abrar's Dine | Login </title>
+        </Helmet>
+         </div>
       </div>
 
 

@@ -1,8 +1,21 @@
-# React + Vite
+# Assignment_Category_0005: **Restaurant Management Website** 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## [LIVE link]()
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+( FullStack Based Assignment-11 **Restaurant Management Website : Abrar's Dine** )
+
+
+
+*In my Assignment-11 , Abrar's Dine, running on the robust Express framework and MongoDB, firebass, axios, CRUD & JWT orchestrates a seamless flow of Abrar's Dine data and transactions. Through meticulously designed routes, it effortlessly handles queries for specific food categories and food details, ensuring a smooth and responsive experience for users. The server's reliable architecture facilitates smooth additions to the user's order and enables efficient updates to the food inventory, creating a reliable and efficient platform for Abrar's Dine enthusiasts.*
+
+
+
+**FIVE main Features of my projects with bullet points**
+-
+- Leveraged React's useState and useEffect hooks for seamless data management and rendering.
+- Integrated useParams for efficient routing and Swal.fire for intuitive and interactive alerts, enhancing the browsing experience.
+- Designed engaging Banner and sleek Navbar components, complementing the dynamic and immersive user interface.
+- Implemented user-friendly AddFood, UpdateFood and PurchaseFood forms, ensuring a seamless data manipulation process.
+- Crafted Home and FoodDetails, MyAddedFood, OrderedFood pages alongside streamlined MyCart and Register functionalities, fostering a user-centric and maintainable platform for Abrar's Dine (restaurent) enthusiasts.
