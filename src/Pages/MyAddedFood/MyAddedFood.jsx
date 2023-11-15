@@ -9,7 +9,7 @@ const MyAddedFood = () => {
   const [dataApi, setDataApi] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/myAdded')
+    axios.get('https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/myAddedFood')
     .then(res => {
       setDataApi(res.data);
     })

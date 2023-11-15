@@ -9,7 +9,7 @@ const Service = () => {
     const [service, setService] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/sixcard')
+        fetch('https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/sixcard')
             .then(res => res.json())
             .then(data => setService(data))
             .catch(error => console.error('Error fetching data: ', error));

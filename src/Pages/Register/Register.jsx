@@ -4,7 +4,6 @@ import { updateProfile } from 'firebase/auth';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import { FcGoogle } from 'react-icons/fc';
 import Swal from 'sweetalert2';
-import { Helmet } from 'react-helmet';
 
 
 
@@ -59,7 +58,7 @@ setSuccess('');
         updateProfile(result.user, {
     
             displayName: name,
-            photoURL: "https://i.ibb.co/QnqFLDG/j.png"
+            photoURL: name,
             })
             .then(()=> {
               // Toast.success('User Created Successfully');
@@ -254,11 +253,6 @@ setSuccess('');
       </div>
           </div>
            {/* <ToastContainer></ToastContainer>  */}
-           <div>
-         <Helmet>
-          <title>Abrar's Dine | Register </title>
-        </Helmet>
-         </div>
        </div>
       
     );

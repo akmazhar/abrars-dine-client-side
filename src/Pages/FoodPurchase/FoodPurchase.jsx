@@ -23,7 +23,7 @@ const FoodPurchase = () => {
     console.log(foodPurchase);
 
     try {
-      const response = await fetch(`http://localhost:5000/foodPurchase/${_id}`, {
+      const response = await fetch(`https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/foodPurchase/${_id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

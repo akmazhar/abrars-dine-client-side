@@ -7,7 +7,7 @@ const Add = () => {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myAddedFood/${id}`)
+    fetch(`https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/myAddedFood/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -25,7 +25,7 @@ const Add = () => {
       food_category,
     };
 
-    fetch(`http://localhost:5000/myAddedFood`, {
+    fetch(`https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/myAddedFood`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

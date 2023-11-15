@@ -32,7 +32,6 @@ import AddFood from './Pages/AddFood/AddFood';
 // import Pagination from './Pages/Pagination/Pagination';
 // import SearchFunctionality from './Pages/SearchFunctionality/SearchFunctionality';
 // import SingleFood from './Pages/SingleFood/SingleFood';
-
 // import EachCard from './Pages/EachCard/EachCard';
 
 
@@ -77,7 +76,7 @@ const router = createBrowserRouter([
   {
     path: "/updateFood",
     element: <PrivetRoute><UpdateFood></UpdateFood></PrivetRoute>,
-    loader: ({params}) => fetch(`http://localhost:5000/updateFood/${params.id}`) 
+    loader: ({params}) => fetch(`https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/updateFood/${params.id}`) 
   },
 
   {
@@ -91,7 +90,7 @@ const router = createBrowserRouter([
    {
     path: "/foodPurchase",
     element: <FoodPurchase></FoodPurchase>,
-    loader: ({params}) => fetch(`http://localhost:5000/foodPurchase/${params.id}`) 
+    loader: ({params}) => fetch(`https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/foodPurchase/${params.id}`) 
   },
   {
     path: "/addFood",
@@ -111,11 +110,12 @@ const router = createBrowserRouter([
   // {
   //   path: "/pagination",
   //   element: <Pagination></Pagination>
-  //   loader: ({currentPage, itemsPerPage}) => fetch(`http://localhost:5000/count?_page=${currentPage}&_limit=${itemsPerPage}`)
+  //   loader: ({currentPage, itemsPerPage}) => fetch(`https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/count?_page=${currentPage}&_limit=${itemsPerPage}`)
   // },
   // {
   //   path: "/searchFunctionality",
-  //   element: <SearchFunctionality></SearchFunctionality>
+  //   element: <SearchFunctionality></SearchFunctionality>,
+  //   loader: ({params}) => fetch(`https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/dish/${params.name}`) 
   // },
   // {
   //   path: "/singleFood",

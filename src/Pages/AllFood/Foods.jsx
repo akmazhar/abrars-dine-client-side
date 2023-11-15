@@ -6,7 +6,7 @@ const Foods = () => {
     const [data, setdata] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/dish')
+        fetch('https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/dish')
             .then((res) => res.json())
             .then((data) => setdata(data))
             .catch((error) => console.error(error));
@@ -23,7 +23,7 @@ const Foods = () => {
       description: data.description,
     };
     const myOrderHandle = () => {
-        fetch("http://localhost:5000/myOrder", {
+        fetch("https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/myOrder", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -57,12 +57,12 @@ const Foods = () => {
                             className="object-cover w-full h-full"
                         />
                     </figure>
-                    <div className="card-body rounded-s-3xl shadow-red-700 px-2 text-center py-4 bg-cyan-300 rounded-t-2xl shadow-inner">
+                    <div className="card-body rounded-s-3xl shadow-red-700 px-2 text-center py-4 bg-green-300 rounded-t-2xl shadow-inner">
                         <div className="flex">
                             <div>
                             <h2 className="card-title text-orange-950 text-start font-serif">{data.name}</h2>
             <p className="font-mono font-bold text-pink-700 text-start">{data.category}</p>
-            <p className="font-mono text-start">Made By: {data.chef}</p>
+            <p className="font-mono bg-black text-white text-center">Made By: {data.chef}</p>
             <p className="font-serif text-start">Quantity : {data.quantity}</p>
             <h2 className="font-mono font-medium text-start">Price: {data.price}</h2>
             <p className="font-sans text-yellow-950 font-semibold text-start">Brief: {data.description}</p> 

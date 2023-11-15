@@ -10,7 +10,7 @@ const Banner = () => {
     <img src="https://i.ibb.co/Nnf0Qcn/1.png" className="w-full" />
     <div className="absolute h-full left-0 top-0  bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
    <div className="mt-10 ml-10">
-   <h2 className="text-5xl text-white font-serif mb-3 ">Healthy & Farm-Fresh<br/> Vegetable Delights<br/><span className="text-6xl text-yellow-700 shadow-2xl font-semibold font-serif">@ Abrar's Dine</span></h2>
+   <h2 className="text-5xl text-white font-serif mb-3 ">Healthy & Farm-Fresh<br/> <span className="text-green-600">Ve<span className="text-red-600">ge<span className="text-yellow-400">ta</span>bl</span>es </span>Delights<br/><span className="text-6xl text-yellow-700 shadow-2xl font-semibold font-serif">@ Abrar's Dine</span></h2>
         <p className="text-white mb-4">Indulge in the vibrant and nourishing experience at Abrars Dine, offering an array of healthy, <br/> farm-fresh vegetables. Savor the natural flavors of handpicked seasonal produce, expertly<br/>incorporated into our delectable dishes, ensuring a wholesome and nutritious dining experience.</p>
         <Link to={`/AllFood`}><button className="btn gap-5 bg-yellow-900 btn-outline text-white mr-10">All Menu</button></Link>
        </div>
@@ -85,3 +85,6 @@ const Banner = () => {
 };
 
 export default Banner;
+
+
+

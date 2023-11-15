@@ -11,7 +11,7 @@ const Pagination = () => {
   const pages = [...Array(numberOfPages).keys()];
 
   useEffect(() => {
-    fetch(`http://localhost:5000/count?_page=${currentPage}&_limit=${itemsPerPage}`)
+    fetch(`https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/count?_page=${currentPage}&_limit=${itemsPerPage}`)
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((error) => console.error(error));

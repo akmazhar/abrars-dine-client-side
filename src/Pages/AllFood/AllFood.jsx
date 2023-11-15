@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Foods from "./Foods";
-import { useLoaderData } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { useLoaderData } from "react-router-dom";
+import { useEffect } from "react";
 
 
 
@@ -41,6 +42,7 @@ import { Helmet } from "react-helmet";
                         <input className="btn bg-[rgb(241,59,59)] mt-32 p-3 text-white rounded-tl-none rounded-bl-none rounded-xl px-7 font-medium" type="submit" value="Search" />
                     </form>
                    </div>
+             
                    <div>
          <Helmet>
           <title>Abrar's Dine | All Food Item</title>

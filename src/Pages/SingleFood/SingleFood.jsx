@@ -7,7 +7,7 @@ const SingleFood = () => {
     const [jsonData, setJsonData] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/dish')
+        fetch('https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/dish')
             .then((res) => res.json())
             .then((data) => setJsonData(data))
             .catch((error) => console.error('Error fetching data:', error));

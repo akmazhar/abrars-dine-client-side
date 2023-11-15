@@ -28,7 +28,7 @@ const MyOrder = () => {
       confirmButtonText: 'Yes, omit it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5000/myOrder/${_id}`)
+        axios.delete(`https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/myOrder/${_id}`)
           .then((res) => {
             // Assuming the response contains information about the deletion
             if (res.data.deletedCount > 0) {
@@ -55,7 +55,7 @@ const MyOrder = () => {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:5000/myOrder')
+    axios.get('https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/myOrder')
       .then(res => {
         setDataApi(res.data);
       })

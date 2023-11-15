@@ -19,3 +19,9 @@
 - Designed engaging Banner and sleek Navbar components, complementing the dynamic and immersive user interface.
 - Implemented user-friendly AddFood, UpdateFood and PurchaseFood forms, ensuring a seamless data manipulation process.
 - Crafted Home and FoodDetails, MyAddedFood, OrderedFood pages alongside streamlined MyCart and Register functionalities, fostering a user-centric and maintainable platform for Abrar's Dine (restaurent) enthusiasts.
+
+
+
+## Authors
+
+[@A K M Azhar](https://www.linkedin.com/in/a-k-m-azarul-islam-3a9499167/)
