@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
@@ -8,17 +7,17 @@ import { Helmet } from "react-helmet";
 const MyAddedFood = () => {
   const [dataApi, setDataApi] = useState([]);
 
+
   useEffect(() => {
-    axios.get('https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/myAddedFood')
-    .then(res => {
-      setDataApi(res.data);
-    })
-    .catch(error => console.error(error))
-  }, []);
- 
+    fetch('https://restaurant-management-server-three.vercel.app/myAddedFood')
+        .then((res) => res.json())
+        .then((dataApi) => setDataApi(dataApi))
+        .catch((error) => console.error(error));
+}, []);
+
   console.log(dataApi)
 
-
+ 
 
 
   return (

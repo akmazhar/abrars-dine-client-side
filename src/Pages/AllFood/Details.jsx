@@ -9,7 +9,7 @@ const Details = () => {
   const [jsonData, setJsonData] = useState([]);
 
   useEffect(() => {
-    fetch(`https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/dish/${id}`)
+    fetch(`https://restaurant-management-server-three.vercel.app/dish/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setJsonData(data);
@@ -28,7 +28,7 @@ const Details = () => {
   };
 
   const myOrderHandle = () => {
-    fetch("https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/myOrder", {
+    fetch("https://restaurant-management-server-three.vercel.app/myOrder", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -76,7 +76,7 @@ const router = createBrowserRouter([
   {
     path: "/updateFood",
     element: <PrivetRoute><UpdateFood></UpdateFood></PrivetRoute>,
-    loader: ({params}) => fetch(`https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/updateFood/${params.id}`) 
+    loader: ({params}) => fetch(`https://restaurant-management-server-three.vercel.app/updateFood/${params.id}`) 
   },
 
   {
@@ -90,7 +90,7 @@ const router = createBrowserRouter([
    {
     path: "/foodPurchase",
     element: <FoodPurchase></FoodPurchase>,
-    loader: ({params}) => fetch(`https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/foodPurchase/${params.id}`) 
+    loader: ({params}) => fetch(`https://restaurant-management-server-three.vercel.app/foodPurchase/${params.id}`) 
   },
   {
     path: "/addFood",
@@ -110,12 +110,12 @@ const router = createBrowserRouter([
   // {
   //   path: "/pagination",
   //   element: <Pagination></Pagination>
-  //   loader: ({currentPage, itemsPerPage}) => fetch(`https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/count?_page=${currentPage}&_limit=${itemsPerPage}`)
+  //   loader: ({currentPage, itemsPerPage}) => fetch(`https://restaurant-management-server-three.vercel.app/count?_page=${currentPage}&_limit=${itemsPerPage}`)
   // },
   // {
   //   path: "/searchFunctionality",
   //   element: <SearchFunctionality></SearchFunctionality>,
-  //   loader: ({params}) => fetch(`https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app/dish/${params.name}`) 
+  //   loader: ({params}) => fetch(`https://restaurant-management-server-three.vercel.app/dish/${params.name}`) 
   // },
   // {
   //   path: "/singleFood",

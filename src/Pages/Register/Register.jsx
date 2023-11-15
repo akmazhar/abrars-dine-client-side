@@ -17,6 +17,7 @@ const Register = () => {
 const handleRegister = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
+    const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
     const accepted = e.target.terms.checked;
@@ -58,7 +59,7 @@ setSuccess('');
         updateProfile(result.user, {
     
             displayName: name,
-            photoURL: name,
+            photoURL: photo,
             })
             .then(()=> {
               // Toast.success('User Created Successfully');

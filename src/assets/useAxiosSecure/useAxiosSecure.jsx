@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const axiosSecure = axios.create({
-baseURL: 'https://restaurant-management-server-36vzbkkon-a-k-m-azhars-projects.vercel.app',
+baseURL: 'https://restaurant-management-server-three.vercel.app',
 withCredentials: true
 });
 
