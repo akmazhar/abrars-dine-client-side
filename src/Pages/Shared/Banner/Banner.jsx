@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const slides = [
   {
     id: 1,
-    image: "https://i.ibb.co/Nnf0Qcn/1.png",
+    image: "https://i.ibb.co.com/2Yh5NXZd/Rustic-Rainbow-Vegetable-Bowl.png",
     eyebrow: "FRESH • HEALTHY • NATURAL",
     title: "Healthy & Farm-Fresh",
     highlight: "Vegetable Delights",
@@ -14,7 +14,8 @@ const slides = [
   },
   {
     id: 2,
-    image: "https://i.ibb.co/T1zNGVG/2.png",
+    image:
+      "https://i.ibb.co.com/LXM9wHFG/Discover-Global-Culinary-Delights.png",
     eyebrow: "A WORLD OF FLAVORS",
     title: "Discover Global",
     highlight: "Culinary Delights",
@@ -24,7 +25,7 @@ const slides = [
   },
   {
     id: 3,
-    image: "https://i.ibb.co/yWVhrrp/5.png",
+    image: "https://i.ibb.co.com/rGK7w9XH/Rustic-Gourmet-Lasagna-Feast.png",
     eyebrow: "AUTHENTIC ITALIAN EXPERIENCE",
     title: "The Art of",
     highlight: "Perfect Lasagna",
@@ -34,7 +35,7 @@ const slides = [
   },
   {
     id: 4,
-    image: "https://i.ibb.co/KxZVqQH/3.png",
+    image: "https://i.ibb.co.com/v6Zmqxk9/Traditional-Panta-Ilish-Feast.png",
     eyebrow: "A TASTE OF BANGLADESH",
     title: "Celebrate Our",
     highlight: "Bengali Heritage",
