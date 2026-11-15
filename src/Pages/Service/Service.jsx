@@ -300,7 +300,7 @@ const Service = () => {
 
               <h2 className="font-serif text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
                 Where Every Meal
-                <span className="mt-2 block italic text-[#F1D69A]">
+                <span className="mt-2 block text-[#efa505]">
                   Becomes a Memory
                 </span>
               </h2>
