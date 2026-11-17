@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import { AuthContext } from "../../../../AuthProvider/AuthProvider";
@@ -16,6 +16,8 @@ import {
   FiShoppingBag,
   FiCoffee,
   FiUser,
+  FiUserCheck,
+  FiSettings,
 } from "react-icons/fi";
 
 const Navbar = () => {
@@ -23,47 +25,126 @@ const Navbar = () => {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  const profileRef = useRef(null);
+  const mobileRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setProfileOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+        setProfileOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
   // Logout Handler
-  const handleLogout = () => {
-    logOut()
-      .then(() => {
-        setProfileOpen(false);
-        setMobileMenuOpen(false);
-        Toast.success("Logged out successfully!");
-      })
-      .catch((error) => {
-        console.error("Logout error:", error.message);
-      });
+  const handleLogout = async () => {
+    if (loggingOut) return;
+
+    setLoggingOut(true);
+
+    try {
+      await logOut();
+
+      setProfileOpen(false);
+      setMobileMenuOpen(false);
+
+      Toast.success("Logged out successfully!");
+    } catch (error) {
+      console.error("Logout error:", error);
+
+      Toast.error?.("Unable to log out. Please try again.");
+    } finally {
+      setLoggingOut(false);
+    }
   };
 
-  // Navigation Link Design
-  const navLinkClass = ({ isActive }) =>
-    `relative inline-flex items-center py-2 text-[13px] font-semibold tracking-[0.12em] uppercase transition-all duration-300
-    after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-[#D4A853] after:transition-all after:duration-300
-    ${
-      isActive
-        ? "text-[#D4A853] after:w-full"
-        : "text-white/75 hover:text-[#D4A853] after:w-0 hover:after:w-full"
-    }`;
-
-  // Close mobile menu after navigation
+  // Close all menus
   const closeMenu = () => {
     setMobileMenuOpen(false);
     setProfileOpen(false);
   };
 
+  // Navigation Link Styling
+  const navLinkClass = ({ isActive }) =>
+    `group relative inline-flex items-center gap-2 py-2.5 text-[13px] font-semibold tracking-[0.08em] uppercase transition-all duration-300
+    ${isActive ? "text-[#D4A853]" : "text-white/75 hover:text-[#E5BE79]"}
+    after:absolute after:bottom-0 after:left-0 after:h-[2px] after:rounded-full after:bg-[#D4A853] after:transition-all after:duration-300
+    ${isActive ? "after:w-full" : "after:w-0 group-hover:after:w-full"}`;
+
+  // Mobile Navigation Link Styling
+  const mobileNavLinkClass = ({ isActive }) =>
+    `flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-semibold transition-all duration-300
+    ${
+      isActive
+        ? "bg-[#D4A853]/10 text-[#D4A853]"
+        : "text-white/75 hover:bg-white/[0.05] hover:text-[#E5BE79]"
+    }`;
+
+  // Account menu item
+  const accountLinkClass =
+    "group flex items-center gap-3 rounded-xl px-4 py-3 text-[13px] font-medium text-white/75 transition-all duration-300 hover:bg-[#D4A853]/10 hover:text-[#E5BE79]";
+
+  // User information
+  const userName = user?.displayName || "Food Lover";
+  const userEmail = user?.email || "";
+  const userPhoto = user?.photoURL;
+
+  // User Avatar
+  const UserAvatar = ({ size = "h-10 w-10", iconSize = "text-2xl" }) => {
+    return (
+      <div
+        className={`${size} flex shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#D4A853]/40 bg-[#D4A853]/10`}
+      >
+        {userPhoto ? (
+          <img
+            src={userPhoto}
+            alt={userName}
+            className="h-full w-full object-cover"
+            referrerPolicy="no-referrer"
+          />
+        ) : (
+          <TbUserCircle className={`${iconSize} text-[#D4A853]`} />
+        )}
+      </div>
+    );
+  };
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[#D4A853]/20 bg-[#10100F]/95 text-white shadow-[0_5px_30px_rgba(0,0,0,0.25)] backdrop-blur-xl">
-      {/* Top Navigation */}
-      <nav className="mx-auto flex min-h-[82px] max-w-7xl items-center justify-between px-5 py-3 sm:px-8 lg:px-12">
+    <header className="sticky top-0 z-50 w-full border-b border-[#D4A853]/20 bg-[#10392C]/95 text-white shadow-[0_8px_35px_rgba(0,0,0,0.20)] backdrop-blur-2xl">
+      {/* Main Navigation */}
+      <nav className="mx-auto flex min-h-[76px] max-w-[1440px] items-center justify-between gap-5 px-4 py-3 sm:px-6 lg:min-h-[86px] lg:px-10 xl:px-14">
         {/* Logo */}
-        <div onClick={closeMenu} className="flex-shrink-0">
+        <div onClick={closeMenu} className="flex shrink-0 items-center">
           <Logo />
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden items-center gap-9 lg:flex">
+        <div className="hidden items-center gap-7 xl:gap-10 lg:flex">
           <NavLink to="/" end className={navLinkClass}>
             Home
           </NavLink>
@@ -78,81 +159,108 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Actions */}
-        <div className="hidden items-center gap-4 lg:flex">
-          {/* Login / User Information */}
+        <div className="hidden items-center gap-3 lg:flex">
+          {/* User Login / Information */}
           {user ? (
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 rounded-full border border-[#D4A853]/20 bg-white/[0.04] px-3 py-2">
-                <TbUserCircle className="h-6 w-6 text-[#D4A853]" />
+              <div className="flex max-w-[190px] items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.05] py-1.5 pl-1.5 pr-4 transition-all duration-300 hover:border-[#D4A853]/40">
+                <UserAvatar size="h-9 w-9" iconSize="text-xl" />
 
-                <span className="max-w-[150px] truncate text-xs font-medium text-white/80">
-                  {user.displayName || user.email}
-                </span>
+                <div className="min-w-0">
+                  <p className="truncate text-[12px] font-semibold text-white">
+                    {userName}
+                  </p>
+
+                  <p className="text-[10px] tracking-wide text-white/45">
+                    Welcome back
+                  </p>
+                </div>
               </div>
 
               <button
                 type="button"
                 onClick={handleLogout}
-                className="group flex items-center gap-2 rounded-full border border-[#D4A853]/60 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#D4A853] transition-all duration-300 hover:border-[#D4A853] hover:bg-[#D4A853] hover:text-[#10100F] hover:shadow-[0_5px_20px_rgba(212,168,83,0.25)]"
+                disabled={loggingOut}
+                className="group inline-flex min-h-[42px] items-center gap-2 rounded-full border border-[#D4A853]/50 px-4 text-[11px] font-bold uppercase tracking-[0.12em] text-[#E5BE79] transition-all duration-300 hover:border-[#D4A853] hover:bg-[#D4A853] hover:text-[#10392C] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <FiLogOut className="transition-transform duration-300 group-hover:-translate-x-1" />
-                Logout
+
+                {loggingOut ? "Logging out..." : "Logout"}
               </button>
             </div>
           ) : (
             <Link
               to="/login"
-              className="group flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4A853] to-[#B88935] px-7 py-3 text-xs font-bold uppercase tracking-[0.15em] text-[#17130C] shadow-[0_5px_20px_rgba(212,168,83,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(212,168,83,0.35)]"
+              className="group inline-flex min-h-[44px] items-center gap-2 rounded-full bg-gradient-to-r from-[#D4A853] to-[#E8C47F] px-6 text-[12px] font-extrabold uppercase tracking-[0.12em] text-[#10392C] shadow-[0_5px_20px_rgba(212,168,83,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(212,168,83,0.32)]"
             >
-              <FiUser />
+              <FiUser className="text-base transition-transform group-hover:scale-110" />
               Login
             </Link>
           )}
 
           {/* Profile Dropdown */}
-          <div className="relative">
+          <div className="relative" ref={profileRef}>
             <button
               type="button"
-              onClick={() => setProfileOpen(!profileOpen)}
-              aria-label="Open profile menu"
+              onClick={() => setProfileOpen((prev) => !prev)}
+              aria-label="Open account menu"
               aria-expanded={profileOpen}
+              aria-haspopup="true"
               className={`flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-300 ${
                 profileOpen
-                  ? "border-[#D4A853] bg-[#D4A853] text-[#10100F]"
-                  : "border-[#D4A853]/40 bg-white/5 text-[#D4A853] hover:border-[#D4A853] hover:bg-[#D4A853] hover:text-[#10100F]"
+                  ? "rotate-0 border-[#D4A853] bg-[#D4A853] text-[#10392C] shadow-[0_0_20px_rgba(212,168,83,0.25)]"
+                  : "border-[#D4A853]/40 bg-white/[0.04] text-[#D4A853] hover:border-[#D4A853] hover:bg-[#D4A853] hover:text-[#10392C]"
               }`}
             >
-              <TbUserCircle className="h-7 w-7" />
+              <TbUserCircle className="text-[27px]" />
             </button>
 
-            {/* Dropdown Menu */}
+            {/* Dropdown */}
             {profileOpen && (
-              <div className="absolute right-0 top-[58px] z-50 w-72 overflow-hidden rounded-2xl border border-[#D4A853]/30 bg-[#171714] shadow-[0_15px_50px_rgba(0,0,0,0.55)] animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="absolute right-0 top-[58px] z-[60] w-[290px] origin-top-right animate-in fade-in slide-in-from-top-2 duration-200 overflow-hidden rounded-2xl border border-[#D4A853]/25 bg-[#123B2E] shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
                 {/* Dropdown Header */}
-                <div className="border-b border-white/10 bg-gradient-to-r from-[#D4A853]/15 to-transparent px-5 py-5">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#D4A853]/40 bg-[#D4A853]/10">
-                      <TbUserCircle className="h-7 w-7 text-[#D4A853]" />
-                    </div>
+                <div className="relative overflow-hidden border-b border-white/10 bg-gradient-to-br from-[#D4A853]/15 to-transparent px-5 py-5">
+                  <div className="absolute -right-8 -top-10 h-28 w-28 rounded-full bg-[#D4A853]/10 blur-2xl" />
+
+                  <div className="relative flex items-center gap-3">
+                    <UserAvatar size="h-12 w-12" iconSize="text-3xl" />
 
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold text-white">
-                        My Account
+                      <p className="truncate text-sm font-bold text-white">
+                        {user ? userName : "Welcome, Food Lover"}
                       </p>
 
-                      <p className="truncate text-xs text-white/50">
-                        {user?.email || "Welcome to Abrar's Dine"}
+                      <p className="mt-1 truncate text-[11px] text-white/50">
+                        {userEmail || "Discover delicious experiences"}
                       </p>
                     </div>
                   </div>
+
+                  {user && (
+                    <div className="mt-3 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#D4A853]">
+                      <FiUserCheck />
+                      Account Active
+                    </div>
+                  )}
                 </div>
 
-                {/* Dropdown Links */}
+                {/* Account Links */}
                 <div className="space-y-1 p-3">
+                  {user && (
+                    <Link
+                      to="/userProfile"
+                      onClick={closeMenu}
+                      className={accountLinkClass}
+                    >
+                      <FiUser className="text-lg text-[#D4A853]" />
+                      My Profile
+                    </Link>
+                  )}
+
                   <Link
                     to="/myAddedFood"
                     onClick={closeMenu}
-                    className="group flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-white/75 transition-all duration-300 hover:bg-[#D4A853]/10 hover:text-[#D4A853]"
+                    className={accountLinkClass}
                   >
                     <FiCoffee className="text-lg text-[#D4A853]" />
                     My Added Food Items
@@ -161,7 +269,7 @@ const Navbar = () => {
                   <Link
                     to="/addfood"
                     onClick={closeMenu}
-                    className="group flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-white/75 transition-all duration-300 hover:bg-[#D4A853]/10 hover:text-[#D4A853]"
+                    className={accountLinkClass}
                   >
                     <FiPlus className="text-lg text-[#D4A853]" />
                     Add a Food Item
@@ -170,7 +278,7 @@ const Navbar = () => {
                   <Link
                     to="/myOrder"
                     onClick={closeMenu}
-                    className="group flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-white/75 transition-all duration-300 hover:bg-[#D4A853]/10 hover:text-[#D4A853]"
+                    className={accountLinkClass}
                   >
                     <FiShoppingBag className="text-lg text-[#D4A853]" />
                     My Ordered Food Items
@@ -183,16 +291,17 @@ const Navbar = () => {
                     <button
                       type="button"
                       onClick={handleLogout}
-                      className="flex w-full items-center justify-center gap-2 rounded-xl border border-red-500/30 px-4 py-3 text-sm font-semibold text-red-400 transition-all duration-300 hover:border-red-500 hover:bg-red-500 hover:text-white"
+                      disabled={loggingOut}
+                      className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-red-400/25 bg-red-500/[0.07] px-4 py-3 text-[12px] font-bold text-red-300 transition-all duration-300 hover:border-red-500 hover:bg-red-500 hover:text-white disabled:opacity-50"
                     >
                       <FiLogOut />
-                      Logout
+                      {loggingOut ? "Logging out..." : "Logout"}
                     </button>
                   ) : (
                     <Link
                       to="/login"
                       onClick={closeMenu}
-                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#D4A853] px-4 py-3 text-sm font-bold text-[#10100F] transition-all duration-300 hover:bg-[#E7BD70]"
+                      className="flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#D4A853] to-[#E8C47F] px-4 py-3 text-[12px] font-bold text-[#10392C] transition-all duration-300 hover:shadow-lg"
                     >
                       <FiUser />
                       Login to Your Account
@@ -207,61 +316,105 @@ const Navbar = () => {
         {/* Mobile Menu Button */}
         <button
           type="button"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle navigation menu"
+          onClick={() => setMobileMenuOpen((prev) => !prev)}
+          aria-label={
+            mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"
+          }
           aria-expanded={mobileMenuOpen}
-          className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#D4A853]/40 bg-[#D4A853]/10 text-[#D4A853] transition-all duration-300 hover:bg-[#D4A853] hover:text-[#10100F] lg:hidden"
+          aria-controls="mobile-navigation"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#D4A853]/40 bg-[#D4A853]/10 text-[#E5BE79] transition-all duration-300 hover:bg-[#D4A853] hover:text-[#10392C] lg:hidden"
         >
           {mobileMenuOpen ? (
-            <FiX className="text-2xl" />
+            <FiX className="text-[23px]" />
           ) : (
-            <FiMenu className="text-2xl" />
+            <FiMenu className="text-[23px]" />
           )}
         </button>
       </nav>
 
       {/* Mobile Navigation */}
       <div
-        className={`overflow-hidden border-t border-[#D4A853]/15 bg-[#151512] transition-all duration-500 ease-in-out lg:hidden ${
-          mobileMenuOpen ? "max-h-[750px] opacity-100" : "max-h-0 opacity-0"
+        id="mobile-navigation"
+        ref={mobileRef}
+        className={`overflow-hidden border-t border-[#D4A853]/15 bg-[#10392C] transition-[max-height,opacity] duration-300 ease-in-out lg:hidden ${
+          mobileMenuOpen ? "max-h-[850px] opacity-100" : "max-h-0 opacity-0"
         }`}
+        aria-hidden={!mobileMenuOpen}
       >
-        <div className="space-y-5 px-6 py-6 sm:px-10">
-          {/* Mobile Links */}
-          <div className="flex flex-col gap-2">
-            <NavLink to="/" end onClick={closeMenu} className={navLinkClass}>
-              Home
+        <div className="mx-auto max-w-7xl space-y-5 px-4 py-5 sm:px-6">
+          {/* Mobile Navigation Links */}
+          <div className="space-y-1">
+            <NavLink
+              to="/"
+              end
+              onClick={closeMenu}
+              className={mobileNavLinkClass}
+            >
+              <span>Home</span>
+              <FiChevronDown className="rotate-[-90deg] text-sm opacity-40" />
             </NavLink>
 
-            <NavLink to="/allFood" onClick={closeMenu} className={navLinkClass}>
-              All Food Items
+            <NavLink
+              to="/allFood"
+              onClick={closeMenu}
+              className={mobileNavLinkClass}
+            >
+              <span>All Food Items</span>
+              <FiChevronDown className="rotate-[-90deg] text-sm opacity-40" />
             </NavLink>
 
-            <NavLink to="/blog" onClick={closeMenu} className={navLinkClass}>
-              Blog
+            <NavLink
+              to="/blog"
+              onClick={closeMenu}
+              className={mobileNavLinkClass}
+            >
+              <span>Blog</span>
+              <FiChevronDown className="rotate-[-90deg] text-sm opacity-40" />
             </NavLink>
           </div>
 
-          {/* Mobile Account Information */}
+          {/* Mobile Account Section */}
           <div className="border-t border-white/10 pt-5">
+            {/* User Information */}
             {user && (
-              <div className="mb-5 flex items-center gap-3">
-                <TbUserCircle className="h-9 w-9 text-[#D4A853]" />
+              <div className="mb-5 flex items-center gap-3 rounded-2xl border border-[#D4A853]/20 bg-white/[0.04] p-4">
+                <UserAvatar size="h-12 w-12" iconSize="text-3xl" />
 
-                <div className="min-w-0">
-                  <p className="text-sm font-semibold text-white">My Account</p>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-bold text-white">
+                    {userName}
+                  </p>
 
-                  <p className="truncate text-xs text-white/50">{user.email}</p>
+                  <p className="mt-1 truncate text-[11px] text-white/50">
+                    {userEmail}
+                  </p>
                 </div>
+
+                <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
               </div>
             )}
 
             {/* Mobile Account Links */}
-            <div className="mb-5 grid grid-cols-1 gap-2 sm:grid-cols-2">
+            <p className="mb-3 px-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[#D4A853]/75">
+              {user ? "My Account" : "Explore Your Account"}
+            </p>
+
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {user && (
+                <Link
+                  to="/userProfile"
+                  onClick={closeMenu}
+                  className="flex min-h-[48px] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.035] px-4 py-3 text-[13px] font-medium text-white/80 transition-all hover:border-[#D4A853]/40 hover:text-[#E5BE79]"
+                >
+                  <FiUser className="text-[#D4A853]" />
+                  My Profile
+                </Link>
+              )}
+
               <Link
                 to="/myAddedFood"
                 onClick={closeMenu}
-                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white/80 transition-all hover:border-[#D4A853]/50 hover:text-[#D4A853]"
+                className="flex min-h-[48px] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.035] px-4 py-3 text-[13px] font-medium text-white/80 transition-all hover:border-[#D4A853]/40 hover:text-[#E5BE79]"
               >
                 <FiCoffee className="text-[#D4A853]" />
                 My Added Food
@@ -270,7 +423,7 @@ const Navbar = () => {
               <Link
                 to="/addfood"
                 onClick={closeMenu}
-                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white/80 transition-all hover:border-[#D4A853]/50 hover:text-[#D4A853]"
+                className="flex min-h-[48px] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.035] px-4 py-3 text-[13px] font-medium text-white/80 transition-all hover:border-[#D4A853]/40 hover:text-[#E5BE79]"
               >
                 <FiPlus className="text-[#D4A853]" />
                 Add Food Item
@@ -279,7 +432,7 @@ const Navbar = () => {
               <Link
                 to="/myOrder"
                 onClick={closeMenu}
-                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white/80 transition-all hover:border-[#D4A853]/50 hover:text-[#D4A853]"
+                className="flex min-h-[48px] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.035] px-4 py-3 text-[13px] font-medium text-white/80 transition-all hover:border-[#D4A853]/40 hover:text-[#E5BE79]"
               >
                 <FiShoppingBag className="text-[#D4A853]" />
                 My Orders
@@ -287,25 +440,35 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Login / Logout */}
-            {user ? (
-              <button
-                type="button"
-                onClick={handleLogout}
-                className="flex w-full items-center justify-center gap-2 rounded-full border border-red-500/40 bg-red-500/10 px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-red-400 transition-all duration-300 hover:bg-red-500 hover:text-white"
-              >
-                <FiLogOut />
-                Logout
-              </button>
-            ) : (
-              <Link
-                to="/login"
-                onClick={closeMenu}
-                className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#D4A853] to-[#B88935] px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-[#17130C] shadow-lg transition-all duration-300 hover:shadow-[0_5px_25px_rgba(212,168,83,0.3)]"
-              >
-                <FiUser />
-                Login
-              </Link>
-            )}
+            <div className="mt-5">
+              {user ? (
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  disabled={loggingOut}
+                  className="flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl border border-red-400/30 bg-red-500/[0.07] px-6 py-3 text-[12px] font-bold uppercase tracking-[0.12em] text-red-300 transition-all duration-300 hover:border-red-500 hover:bg-red-500 hover:text-white disabled:opacity-50"
+                >
+                  <FiLogOut />
+                  {loggingOut ? "Logging out..." : "Logout"}
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={closeMenu}
+                  className="flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#D4A853] to-[#E8C47F] px-6 py-3 text-[12px] font-extrabold uppercase tracking-[0.12em] text-[#10392C] shadow-lg transition-all duration-300 hover:shadow-[0_5px_25px_rgba(212,168,83,0.25)]"
+                >
+                  <FiUser />
+                  Login to Your Account
+                </Link>
+              )}
+            </div>
+          </div>
+
+          {/* Mobile Footer */}
+          <div className="border-t border-white/10 pt-4 text-center">
+            <p className="text-[10px] tracking-[0.08em] text-white/35">
+              © {new Date().getFullYear()} Abrar's Dine. All rights reserved.
+            </p>
           </div>
         </div>
       </div>

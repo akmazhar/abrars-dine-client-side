@@ -1,0 +1,812 @@
+/* =========================================
+   ABRAR'S DINE — MY ORDER PAGE
+   Premium Responsive Design
+   Forest Green | Warm Cream | Gold
+========================================= */
+
+.myorder-page {
+  --mo-green: #174c3a;
+  --mo-green-dark: #10392c;
+  --mo-green-light: #eaf1ec;
+  --mo-gold: #b58a42;
+  --mo-cream: #f7f5ef;
+  --mo-white: #ffffff;
+  --mo-text: #24382e;
+  --mo-muted: #78847d;
+  --mo-border: #e9e8df;
+  --mo-red: #b7473e;
+
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--mo-cream);
+  color: var(--mo-text);
+  font-family: "Inter", sans-serif;
+}
+
+/* =========================================
+   HERO SECTION
+========================================= */
+
+.myorder-hero {
+  position: relative;
+  width: 100%;
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--mo-green-dark);
+}
+
+.myorder-hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.myorder-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(10, 37, 28, 0.88) 0%,
+    rgba(15, 54, 39, 0.7) 55%,
+    rgba(15, 54, 39, 0.38) 100%
+  );
+}
+
+.myorder-hero-content {
+  position: relative;
+  z-index: 2;
+  width: min(1100px, 90%);
+  padding: 70px 0;
+  color: var(--mo-white);
+  animation: moFadeUp 0.8s ease both;
+}
+
+.myorder-eyebrow,
+.myorder-section-label {
+  display: inline-block;
+  color: var(--mo-gold);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.myorder-hero-content h1 {
+  margin: 17px 0 12px;
+  font-family: Georgia, serif;
+  font-size: clamp(42px, 6vw, 68px);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -1.8px;
+}
+
+.myorder-hero-content h1 span {
+  color: #e4c58d;
+  font-style: italic;
+}
+
+.myorder-hero-content p {
+  max-width: 540px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.83);
+  font-size: 15px;
+  line-height: 1.9;
+  font-weight: 400;
+}
+
+.myorder-hero-line {
+  width: 68px;
+  height: 3px;
+  margin-top: 25px;
+  border-radius: 10px;
+  background: var(--mo-gold);
+}
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.myorder-content {
+  width: min(1180px, 90%);
+  margin: 0 auto;
+  padding: 75px 0 85px;
+}
+
+.myorder-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 38px;
+}
+
+.myorder-heading h2 {
+  margin: 10px 0 8px;
+  color: var(--mo-green-dark);
+  font-family: Georgia, serif;
+  font-size: clamp(27px, 3vw, 37px);
+  font-weight: 700;
+  letter-spacing: -0.7px;
+}
+
+.myorder-heading p {
+  margin: 0;
+  color: var(--mo-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.myorder-count {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 19px;
+  border: 1px solid #e2e8df;
+  border-radius: 14px;
+  background: var(--mo-white);
+}
+
+.myorder-count-number {
+  display: flex;
+  width: 39px;
+  height: 39px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  background: var(--mo-green-light);
+  color: var(--mo-green);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.myorder-count-label {
+  color: var(--mo-text);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================================
+   ORDER GRID
+========================================= */
+
+.myorder-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 27px;
+}
+
+/* =========================================
+   ORDER CARD
+========================================= */
+
+.myorder-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 76, 58, 0.08);
+  border-radius: 19px;
+  background: var(--mo-white);
+  box-shadow: 0 7px 28px rgba(28, 55, 41, 0.055);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.myorder-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(181, 138, 66, 0.35);
+  box-shadow: 0 18px 42px rgba(28, 55, 41, 0.12);
+}
+
+.myorder-card-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 245px;
+  overflow: hidden;
+  background: #e9e8df;
+}
+
+.myorder-card-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.myorder-card:hover .myorder-card-image {
+  transform: scale(1.055);
+}
+
+.myorder-category {
+  position: absolute;
+  bottom: 17px;
+  left: 18px;
+  max-width: calc(100% - 36px);
+  overflow: hidden;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+  background: rgba(19, 57, 42, 0.91);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+}
+
+/* =========================================
+   CARD BODY
+========================================= */
+
+.myorder-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 25px 25px 22px;
+}
+
+.myorder-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.myorder-card-overline {
+  color: var(--mo-gold);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+}
+
+.myorder-food-name {
+  margin: 8px 0 0;
+  color: var(--mo-green-dark);
+  font-family: Georgia, serif;
+  font-size: clamp(20px, 2vw, 25px);
+  font-weight: 700;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.myorder-price {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.myorder-price span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--mo-muted);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+.myorder-price strong {
+  color: var(--mo-green);
+  font-size: 20px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.myorder-divider {
+  width: 100%;
+  height: 1px;
+  margin: 22px 0;
+  background: var(--mo-border);
+}
+
+/* =========================================
+   FOOD DETAILS
+========================================= */
+
+.myorder-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.myorder-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.myorder-detail-icon {
+  display: flex;
+  width: 33px;
+  height: 33px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--mo-green-light);
+  color: var(--mo-green);
+  font-size: 16px;
+}
+
+.myorder-detail div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.myorder-detail div span {
+  color: var(--mo-muted);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.myorder-detail div strong {
+  overflow: hidden;
+  color: var(--mo-text);
+  font-size: 12px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================
+   ACTION BUTTONS
+========================================= */
+
+.myorder-actions {
+  display: grid;
+  grid-template-columns: 0.85fr 1.4fr;
+  gap: 11px;
+  margin-top: auto;
+}
+
+.myorder-delete-btn,
+.myorder-purchase-btn {
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.myorder-delete-btn {
+  background: #fff3f1;
+  color: var(--mo-red);
+  border-color: #f5e0dc;
+}
+
+.myorder-delete-btn span {
+  font-size: 19px;
+  line-height: 1;
+}
+
+.myorder-delete-btn:hover {
+  background: var(--mo-red);
+  color: #fff;
+  border-color: var(--mo-red);
+}
+
+.myorder-purchase-btn {
+  background: var(--mo-green);
+  color: #fff;
+  box-shadow: 0 5px 13px rgba(23, 76, 58, 0.12);
+}
+
+.myorder-purchase-btn span {
+  font-size: 17px;
+  transition: transform 0.3s ease;
+}
+
+.myorder-purchase-btn:hover {
+  background: var(--mo-green-dark);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(23, 76, 58, 0.2);
+}
+
+.myorder-purchase-btn:hover span {
+  transform: translateX(4px);
+}
+
+/* =========================================
+   LOADING / EMPTY / ERROR STATES
+========================================= */
+
+.myorder-state {
+  display: flex;
+  min-height: 330px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 35px 20px;
+  border: 1px solid var(--mo-border);
+  border-radius: 18px;
+  background: var(--mo-white);
+  text-align: center;
+}
+
+.myorder-state h3 {
+  margin: 17px 0 8px;
+  color: var(--mo-green-dark);
+  font-family: Georgia, serif;
+  font-size: 25px;
+}
+
+.myorder-state p {
+  max-width: 450px;
+  margin: 0;
+  color: var(--mo-muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.myorder-spinner {
+  width: 45px;
+  height: 45px;
+  border: 4px solid #e5ede7;
+  border-top-color: var(--mo-green);
+  border-radius: 50%;
+  animation: moSpin 0.8s linear infinite;
+}
+
+.myorder-empty-icon {
+  display: flex;
+  width: 75px;
+  height: 75px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 23px;
+  border-radius: 23px;
+  background: var(--mo-green-light);
+  font-size: 35px;
+}
+
+.myorder-empty h3 {
+  margin-top: 12px;
+}
+
+.myorder-explore-btn,
+.myorder-retry-btn {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 23px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 9px;
+  background: var(--mo-green);
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.myorder-explore-btn:hover,
+.myorder-retry-btn:hover {
+  background: var(--mo-green-dark);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.myorder-error .myorder-state-icon {
+  display: flex;
+  width: 55px;
+  height: 55px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #fff0ed;
+  color: var(--mo-red);
+  font-size: 28px;
+  font-weight: 800;
+}
+
+/* =========================================
+   BOTTOM NOTE
+========================================= */
+
+.myorder-bottom-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 20px 55px;
+  text-align: center;
+}
+
+.myorder-bottom-note > span {
+  color: var(--mo-gold);
+  font-size: 22px;
+}
+
+.myorder-bottom-note p {
+  margin: 0;
+  color: var(--mo-muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.myorder-bottom-note strong {
+  color: var(--mo-green);
+}
+
+/* =========================================
+   SWEETALERT
+========================================= */
+
+.abrar-swal-popup {
+  border-radius: 18px !important;
+  font-family: "Inter", sans-serif !important;
+}
+
+.abrar-swal-popup .swal2-title {
+  color: var(--mo-green-dark) !important;
+  font-family: Georgia, serif !important;
+}
+
+.abrar-swal-popup .swal2-html-container {
+  color: #78847d !important;
+  font-size: 13px !important;
+  line-height: 1.7 !important;
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes moSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes moFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .myorder-hero {
+    min-height: 320px;
+  }
+
+  .myorder-content {
+    width: 92%;
+    padding: 60px 0 70px;
+  }
+
+  .myorder-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .myorder-card-image-wrap {
+    height: 205px;
+  }
+
+  .myorder-card-body {
+    padding: 20px 18px;
+  }
+
+  .myorder-food-name {
+    font-size: 20px;
+  }
+
+  .myorder-price strong {
+    font-size: 17px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .myorder-hero {
+    min-height: 280px;
+  }
+
+  .myorder-hero-content {
+    width: 88%;
+    padding: 55px 0;
+  }
+
+  .myorder-hero-content h1 {
+    font-size: clamp(39px, 10vw, 50px);
+  }
+
+  .myorder-hero-content p {
+    max-width: 360px;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .myorder-eyebrow,
+  .myorder-section-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  .myorder-content {
+    width: 90%;
+    padding: 48px 0 55px;
+  }
+
+  .myorder-heading {
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+
+  .myorder-heading h2 {
+    font-size: 27px;
+  }
+
+  .myorder-heading p {
+    font-size: 12px;
+  }
+
+  .myorder-count {
+    gap: 8px;
+    padding: 9px;
+  }
+
+  .myorder-count-number {
+    width: 31px;
+    height: 31px;
+    font-size: 14px;
+  }
+
+  .myorder-count-label {
+    max-width: 65px;
+    font-size: 9px;
+    line-height: 1.4;
+  }
+
+  .myorder-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .myorder-card {
+    border-radius: 15px;
+  }
+
+  .myorder-card-image-wrap {
+    height: 225px;
+  }
+
+  .myorder-card-body {
+    padding: 20px;
+  }
+
+  .myorder-food-name {
+    font-size: 23px;
+  }
+
+  .myorder-price strong {
+    font-size: 18px;
+  }
+
+  .myorder-details {
+    gap: 10px;
+  }
+
+  .myorder-bottom-note {
+    padding-bottom: 35px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+  .myorder-hero {
+    min-height: 250px;
+  }
+
+  .myorder-content {
+    width: 92%;
+  }
+
+  .myorder-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .myorder-count {
+    padding: 8px 12px;
+  }
+
+  .myorder-card-image-wrap {
+    height: 190px;
+  }
+
+  .myorder-card-body {
+    padding: 17px 14px;
+  }
+
+  .myorder-card-top {
+    flex-wrap: wrap;
+  }
+
+  .myorder-price {
+    text-align: left;
+  }
+
+  .myorder-price span {
+    margin-bottom: 2px;
+  }
+
+  .myorder-food-name {
+    font-size: 21px;
+  }
+
+  .myorder-detail div strong {
+    font-size: 11px;
+  }
+
+  .myorder-actions {
+    grid-template-columns: 1fr 1.3fr;
+    gap: 8px;
+  }
+
+  .myorder-delete-btn,
+  .myorder-purchase-btn {
+    min-height: 43px;
+    font-size: 11px;
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .myorder-page *,
+  .myorder-page *::before,
+  .myorder-page *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

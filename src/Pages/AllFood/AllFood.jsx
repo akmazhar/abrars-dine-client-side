@@ -1,15 +1,16 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useLoaderData } from "react-router-dom";
 import Foods from "./Foods";
 
 const AllFood = () => {
-  const apiItem = useLoaderData() || [];
+  const loadedFoods = useLoaderData();
+  const apiItem = Array.isArray(loadedFoods) ? loadedFoods : [];
 
   const [searchTerm, setSearchTerm] = useState("");
   const [activeSearch, setActiveSearch] = useState("");
 
-  // Search Food Items
+  // Filter Food Items
   const filteredFoods = useMemo(() => {
     const query = activeSearch.trim().toLowerCase();
 
@@ -18,11 +19,13 @@ const AllFood = () => {
     return apiItem.filter((food) => food.name?.toLowerCase().includes(query));
   }, [apiItem, activeSearch]);
 
+  // Search Handler
   const handleSearch = (e) => {
     e.preventDefault();
     setActiveSearch(searchTerm);
   };
 
+  // Clear Search
   const clearSearch = () => {
     setSearchTerm("");
     setActiveSearch("");
@@ -38,12 +41,12 @@ const AllFood = () => {
         />
       </Helmet>
 
-      <main className="min-h-screen bg-[#F5F1E8]">
-        {/* =================================
+      <main className="min-h-screen overflow-hidden bg-[#F5F1E8]">
+        {/* =========================================
             PREMIUM FOOD HERO SECTION
-        ================================= */}
+        ========================================= */}
 
-        <section className="relative flex min-h-[430px] items-center justify-center overflow-hidden bg-[#142D22] sm:min-h-[500px] lg:min-h-[560px]">
+        <section className="relative flex min-h-[440px] items-center justify-center overflow-hidden bg-[#142D22] sm:min-h-[510px] lg:min-h-[570px]">
           {/* Background Image */}
           <img
             src="https://i.ibb.co/KWCTq6Y/Food-Menu.png"
@@ -51,17 +54,19 @@ const AllFood = () => {
             className="absolute inset-0 h-full w-full object-cover object-center opacity-45"
           />
 
-          {/* Premium Overlay */}
+          {/* Dark Overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#10251B]/95 via-[#142D22]/85 to-[#142D22]/65" />
 
-          <div className="absolute inset-0 bg-gradient-to-t from-[#10251B]/65 via-transparent to-black/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#10251B]/75 via-transparent to-black/10" />
 
-          {/* Decorative Gold Elements */}
+          {/* Decorative Elements */}
           <div className="absolute left-0 top-0 h-full w-[3px] bg-gradient-to-b from-[#E8C77D] via-[#B58A42] to-transparent" />
 
           <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full border border-[#E8C77D]/15" />
 
           <div className="absolute -right-12 -top-12 h-56 w-56 rounded-full border border-[#E8C77D]/10" />
+
+          <div className="absolute bottom-0 left-0 h-[3px] w-full bg-gradient-to-r from-transparent via-[#B58A42] to-transparent" />
 
           {/* Hero Content */}
           <div className="relative z-10 mx-auto w-full max-w-5xl px-5 py-20 text-center sm:px-8">
@@ -69,7 +74,7 @@ const AllFood = () => {
             <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-[#E8C77D]/35 bg-white/5 px-5 py-2.5 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-[#E8C77D]" />
 
-              <span className="text-[9px] font-bold uppercase tracking-[0.28em] text-[#E8C77D] sm:text-[10px]">
+              <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#E8C77D] sm:text-[10px]">
                 A World of Extraordinary Flavors
               </span>
             </div>
@@ -96,7 +101,7 @@ const AllFood = () => {
               <span className="h-px w-10 bg-[#B58A42]" />
             </div>
 
-            {/* Search Bar */}
+            {/* Search Form */}
             <form
               onSubmit={handleSearch}
               className="mx-auto flex w-full max-w-[620px] items-center rounded-full border border-white/20 bg-white p-1.5 shadow-[0_15px_50px_rgba(0,0,0,0.25)] transition-all duration-300 focus-within:border-[#B58A42]"
@@ -116,15 +121,12 @@ const AllFood = () => {
                 </svg>
               </div>
 
-              {/* Search Input */}
+              {/* Input */}
               <input
                 type="search"
                 name="foodSearch"
                 value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  setActiveSearch(e.target.value);
-                }}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search your favorite dish..."
                 aria-label="Search food by name"
                 className="min-w-0 flex-1 border-none bg-transparent text-xs text-[#24382E] outline-none placeholder:text-[#9CA69D] focus:outline-none sm:text-sm"
@@ -156,14 +158,11 @@ const AllFood = () => {
               FIND YOUR FAVORITE FLAVOR AT ABRAR'S DINE
             </p>
           </div>
-
-          {/* Bottom Gold Border */}
-          <div className="absolute bottom-0 left-0 h-[3px] w-full bg-gradient-to-r from-transparent via-[#B58A42] to-transparent" />
         </section>
 
-        {/* =================================
-            MENU CONTENT SECTION
-        ================================= */}
+        {/* =========================================
+            FOOD COLLECTION SECTION
+        ========================================= */}
 
         <section className="relative mx-auto max-w-[1440px] px-4 py-14 sm:px-7 sm:py-16 lg:px-12 lg:py-20">
           {/* Section Heading */}
@@ -190,9 +189,9 @@ const AllFood = () => {
               </p>
             </div>
 
-            {/* Result Counter */}
+            {/* Food Counter */}
             <div className="inline-flex w-fit items-center gap-3 rounded-full border border-[#B58A42]/30 bg-white px-5 py-3 shadow-sm">
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#174C3A] font-serif text-sm font-bold text-white">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#174C3A] font-serif text-sm font-bold text-white">
                 {filteredFoods.length}
               </span>
 
@@ -219,6 +218,7 @@ const AllFood = () => {
               </p>
 
               <button
+                type="button"
                 onClick={clearSearch}
                 className="text-[10px] font-bold uppercase tracking-wider text-[#947039] transition hover:text-[#174C3A]"
               >
@@ -237,7 +237,11 @@ const AllFood = () => {
                 🍽️
               </div>
 
-              <h3 className="font-serif text-2xl font-bold text-[#24382E] sm:text-3xl">
+              <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#947039]">
+                Search Results
+              </span>
+
+              <h3 className="mt-3 font-serif text-2xl font-bold text-[#24382E] sm:text-3xl">
                 No Dishes Found
               </h3>
 
@@ -247,6 +251,7 @@ const AllFood = () => {
               </p>
 
               <button
+                type="button"
                 onClick={clearSearch}
                 className="mt-7 rounded-full bg-[#174C3A] px-7 py-3.5 text-[10px] font-bold uppercase tracking-widest text-white transition hover:bg-[#216448]"
               >
@@ -256,9 +261,9 @@ const AllFood = () => {
           )}
         </section>
 
-        {/* =================================
+        {/* =========================================
             BRAND FOOTER MESSAGE
-        ================================= */}
+        ========================================= */}
 
         <section className="border-t border-[#B58A42]/20 bg-[#EEE9DD] px-5 py-12 text-center sm:py-16">
           <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#947039]">

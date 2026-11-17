@@ -2,6 +2,20 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import {
+  FiArrowLeft,
+  FiArrowRight,
+  FiCheckCircle,
+  FiGlobe,
+  FiMapPin,
+  FiPackage,
+  FiShoppingBag,
+  FiTag,
+  FiUser,
+  FiCoffee,
+  FiAward,
+} from "react-icons/fi";
+import "./Details.css";
 
 const API_URL = "https://restaurant-management-server-three.vercel.app";
 
@@ -13,6 +27,7 @@ const Details = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [ordering, setOrdering] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   // Fetch Food Details
   useEffect(() => {
@@ -22,13 +37,19 @@ const Details = () => {
       try {
         setLoading(true);
         setError("");
+        setFood(null);
+        setImageError(false);
 
         const response = await fetch(`${API_URL}/dish/${id}`, {
           signal: controller.signal,
         });
 
         if (!response.ok) {
-          throw new Error("Unable to load food details.");
+          throw new Error(
+            response.status === 404
+              ? "This food item could not be found."
+              : "Unable to load food details. Please try again.",
+          );
         }
 
         const data = await response.json();
@@ -107,6 +128,8 @@ const Details = () => {
         text: err.message || "Please try again later.",
         icon: "error",
         confirmButtonColor: "#174C3A",
+        background: "#F5F1E8",
+        color: "#24382E",
       });
     } finally {
       setOrdering(false);
@@ -116,253 +139,262 @@ const Details = () => {
   // Loading State
   if (loading) {
     return (
-      <div className="flex min-h-[70vh] items-center justify-center bg-[#F5F1E8]">
-        <div className="text-center">
-          <span className="loading loading-spinner loading-lg text-[#174C3A]"></span>
-          <p className="mt-4 font-serif text-sm tracking-wider text-[#174C3A]">
-            Preparing Your Experience...
-          </p>
+      <main className="details-state-page">
+        <div className="details-loading-card">
+          <div className="details-loader">
+            <FiCoffee />
+          </div>
+
+          <h2>Preparing Your Experience</h2>
+
+          <p>We're bringing something delicious to your table...</p>
+
+          <div className="details-loading-line">
+            <span></span>
+          </div>
         </div>
-      </div>
+      </main>
     );
   }
 
   // Error State
   if (error || !food) {
     return (
-      <div className="flex min-h-[70vh] items-center justify-center bg-[#F5F1E8] px-5">
-        <div className="max-w-md rounded-3xl border border-[#B58A42]/30 bg-white p-8 text-center shadow-xl sm:p-12">
-          <div className="mb-5 text-5xl">🍽️</div>
+      <main className="details-state-page px-4">
+        <div className="details-error-card">
+          <div className="details-error-icon">
+            <FiCoffee />
+          </div>
 
-          <h2 className="font-serif text-2xl font-bold text-[#24382E]">
-            Food Not Found
-          </h2>
+          <span className="details-eyebrow">ABRAR'S DINE</span>
 
-          <p className="mt-3 text-sm leading-7 text-[#68766C]">
+          <h2>Food Not Found</h2>
+
+          <p>
             {error || "Sorry, this delicious item is currently unavailable."}
           </p>
 
-          <Link
-            to="/AllFood"
-            className="mt-7 inline-flex rounded-full bg-[#174C3A] px-7 py-3 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#216448]"
-          >
+          <Link to="/AllFood" className="details-primary-link">
+            <FiArrowLeft />
             Explore Our Menu
           </Link>
         </div>
-      </div>
+      </main>
     );
   }
+
+  const hasQuantity =
+    food.quantity !== undefined &&
+    food.quantity !== null &&
+    food.quantity !== "";
 
   return (
     <>
       <Helmet>
         <title>{food.name} | Abrar's Dine - Food Details</title>
+
         <meta
           name="description"
           content={food.description || `Discover ${food.name} at Abrar's Dine.`}
         />
       </Helmet>
 
-      <main className="min-h-screen overflow-hidden bg-[#F5F1E8] px-4 pb-16 pt-24 sm:px-6 sm:pt-28 lg:px-10 lg:pb-24">
-        {/* Background Decoration */}
-        <div className="pointer-events-none fixed right-0 top-32 -z-0 h-72 w-72 rounded-full bg-[#B58A42]/10 blur-[100px]" />
+      <main className="details-page">
+        {/* DECORATIVE BACKGROUND */}
+        <div className="details-decoration details-decoration-one"></div>
+        <div className="details-decoration details-decoration-two"></div>
 
-        <div className="relative mx-auto max-w-7xl">
-          {/* Breadcrumb */}
-          <div className="mb-7 flex flex-wrap items-center gap-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[#829087] sm:mb-10 sm:text-xs">
-            <Link to="/" className="transition hover:text-[#174C3A]">
-              Home
-            </Link>
-
-            <span>/</span>
-
-            <Link to="/AllFood" className="transition hover:text-[#174C3A]">
-              Our Menu
-            </Link>
+        <div className="details-container">
+          {/* BREADCRUMB */}
+          <nav className="details-breadcrumb" aria-label="Breadcrumb">
+            <Link to="/">Home</Link>
 
             <span>/</span>
 
-            <span className="max-w-[150px] truncate text-[#B58A42]">
-              {food.name}
-            </span>
-          </div>
+            <Link to="/AllFood">Our Menu</Link>
 
-          {/* Main Showcase */}
-          <div className="grid overflow-hidden rounded-[25px] border border-[#B58A42]/20 bg-white shadow-[0_20px_70px_rgba(36,56,46,0.09)] lg:grid-cols-2 lg:rounded-[35px]">
-            {/* Food Image Section */}
-            <div className="relative min-h-[300px] overflow-hidden bg-[#EAE5D9] sm:min-h-[420px] lg:min-h-[620px]">
-              <img
-                src={food.image}
-                alt={food.name}
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-              />
+            <span>/</span>
 
-              {/* Image Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#142D22]/75 via-transparent to-black/10" />
+            <span className="breadcrumb-current">{food.name}</span>
+          </nav>
 
-              {/* Image Label */}
-              <div className="absolute left-5 top-5 sm:left-8 sm:top-8">
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/20 px-4 py-2 text-[9px] font-bold uppercase tracking-[0.2em] text-white shadow-lg backdrop-blur-md">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#E8C77D]" />
-                  Signature Selection
-                </span>
+          {/* BACK LINK */}
+          <Link to="/AllFood" className="details-back-link">
+            <FiArrowLeft />
+            Back to Our Collection
+          </Link>
+
+          {/* MAIN SHOWCASE */}
+          <section className="details-showcase">
+            {/* LEFT: FOOD IMAGE */}
+            <div className="details-image-section">
+              {!imageError && food.image ? (
+                <img
+                  src={food.image}
+                  alt={food.name}
+                  className="details-food-image"
+                  onError={() => setImageError(true)}
+                />
+              ) : (
+                <div className="details-image-fallback">
+                  <FiCoffee />
+                  <p>Image Unavailable</p>
+                </div>
+              )}
+
+              <div className="details-image-overlay"></div>
+
+              {/* TOP BADGE */}
+              <div className="details-image-badge">
+                <span className="badge-dot"></span>
+                Signature Selection
               </div>
 
-              {/* Image Bottom Content */}
-              <div className="absolute bottom-6 left-5 right-5 sm:bottom-9 sm:left-8 sm:right-8">
-                <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.25em] text-[#E8C77D] sm:text-[10px]">
-                  A Taste Worth Remembering
-                </p>
+              {/* IMAGE CONTENT */}
+              <div className="details-image-content">
+                <span className="image-caption">A TASTE WORTH REMEMBERING</span>
 
-                <h2 className="max-w-lg font-serif text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
-                  {food.name}
-                </h2>
+                <h2>{food.name}</h2>
 
-                <div className="mt-4 h-[2px] w-14 bg-[#D5B16D]" />
+                <div className="image-gold-line"></div>
+
+                <p>Crafted with passion. Served with excellence.</p>
               </div>
+
+              {/* IMAGE CORNER DECORATION */}
+              <div className="image-corner-decoration"></div>
             </div>
 
-            {/* Food Information */}
-            <div className="flex flex-col justify-center bg-gradient-to-br from-white to-[#F9F7F1] px-5 py-8 sm:px-9 sm:py-11 lg:px-12 lg:py-14 xl:px-16">
-              {/* Section Label */}
-              <div className="mb-5 flex items-center gap-2">
-                <span className="h-[2px] w-8 bg-[#B58A42]" />
+            {/* RIGHT: FOOD INFORMATION */}
+            <div className="details-information">
+              {/* SECTION LABEL */}
+              <div className="details-section-label">
+                <span></span>
+                DISCOVER THE EXPERIENCE
+              </div>
 
-                <span className="text-[9px] font-extrabold uppercase tracking-[0.25em] text-[#947039]">
-                  Discover The Experience
+              {/* FOOD TITLE */}
+              <div className="details-title-area">
+                <span className="details-category">
+                  <FiTag />
+                  {food.category || "Special Selection"}
                 </span>
-              </div>
 
-              {/* Food Name */}
-              <h1 className="font-serif text-3xl font-bold leading-[1.15] tracking-tight text-[#24382E] sm:text-4xl xl:text-5xl">
-                {food.name}
-              </h1>
+                <h1>{food.name}</h1>
 
-              <p className="mt-3 text-xs font-medium uppercase tracking-[0.15em] text-[#8A9188]">
-                {food.category}
-              </p>
-
-              {/* Decorative Divider */}
-              <div className="my-6 flex items-center gap-2 sm:my-8">
-                <span className="h-[2px] w-10 bg-[#B58A42]" />
-                <span className="h-1.5 w-1.5 rotate-45 bg-[#B58A42]" />
-                <span className="h-px w-10 bg-[#B58A42]/40" />
-              </div>
-
-              {/* Description */}
-              <div>
-                <h3 className="mb-3 font-serif text-lg font-bold text-[#174C3A]">
-                  About This Dish
-                </h3>
-
-                <p className="text-[13px] leading-[1.9] text-[#68766C] sm:text-sm sm:leading-8">
+                <p>
                   {food.description ||
                     "A delicious selection prepared with care and attention to flavor."}
                 </p>
               </div>
 
-              {/* Food Information Cards */}
-              <div className="mt-7 grid grid-cols-2 gap-3 sm:mt-8 sm:gap-4">
-                <div className="rounded-2xl border border-[#174C3A]/10 bg-[#F5F1E8]/70 p-4">
-                  <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-[#947039]">
-                    Category
-                  </p>
-
-                  <p className="mt-2 break-words font-serif text-sm font-bold text-[#174C3A] sm:text-base">
-                    {food.category || "Special Dish"}
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-[#174C3A]/10 bg-[#F5F1E8]/70 p-4">
-                  <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-[#947039]">
-                    Origin
-                  </p>
-
-                  <p className="mt-2 break-words font-serif text-sm font-bold text-[#174C3A] sm:text-base">
-                    {food.origin || "Not specified"}
-                  </p>
-                </div>
-
-                <div className="col-span-2 rounded-2xl border border-[#174C3A]/10 bg-[#F5F1E8]/70 p-4">
-                  <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-[#947039]">
-                    Prepared By
-                  </p>
-
-                  <p className="mt-2 font-serif text-base font-bold text-[#174C3A]">
-                    {food.chef || "Abrar's Dine Kitchen"}
-                  </p>
-                </div>
+              <div className="details-gold-divider">
+                <span></span>
+                <i></i>
+                <span></span>
               </div>
 
-              {/* Price Section */}
-              <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-[#B58A42]/25 pt-6 sm:mt-9">
-                <div>
-                  <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#8A9188]">
-                    Experience This Delight
-                  </p>
+              {/* FOOD FEATURES */}
+              <div className="details-features">
+                <div className="details-feature-card">
+                  <div className="feature-icon">
+                    <FiGlobe />
+                  </div>
 
-                  <div className="mt-1 flex items-baseline gap-1">
-                    <span className="font-serif text-2xl font-bold text-[#174C3A] sm:text-3xl">
-                      ${food.price}
-                    </span>
-
-                    <span className="text-[10px] text-[#8A9188]">/ Item</span>
+                  <div>
+                    <span>FOOD ORIGIN</span>
+                    <h3>{food.origin || "Not specified"}</h3>
                   </div>
                 </div>
 
-                <span className="rounded-full border border-[#B58A42]/40 bg-[#B58A42]/10 px-4 py-2 text-[9px] font-bold uppercase tracking-widest text-[#947039]">
-                  Premium Quality
-                </span>
+                <div className="details-feature-card">
+                  <div className="feature-icon">
+                    <FiPackage />
+                  </div>
+
+                  <div>
+                    <span>QUANTITY</span>
+                    <h3>{hasQuantity ? food.quantity : "Not specified"}</h3>
+                  </div>
+                </div>
+
+                <div className="details-feature-card full-feature">
+                  <div className="feature-icon">
+                    <FiUser />
+                  </div>
+
+                  <div>
+                    <span>PREPARED BY</span>
+                    <h3>{food.chef || "Abrar's Dine Kitchen"}</h3>
+                  </div>
+                </div>
               </div>
 
-              {/* Order Button */}
+              {/* PRICE */}
+              <div className="details-price-section">
+                <div>
+                  <span className="price-caption">EXPERIENCE THIS DELIGHT</span>
+
+                  <div className="details-price">
+                    <span className="currency-symbol">$</span>
+                    {food.price}
+                    <small>/ Item</small>
+                  </div>
+                </div>
+
+                <div className="premium-quality-badge">
+                  <FiAward />
+                  Premium Quality
+                </div>
+              </div>
+
+              {/* ORDER BUTTON */}
               <button
                 type="button"
                 onClick={myOrderHandle}
                 disabled={ordering}
-                className="group mt-7 flex w-full items-center justify-center gap-4 rounded-full bg-gradient-to-r from-[#174C3A] to-[#216448] px-6 py-4 text-[10px] font-extrabold uppercase tracking-[0.18em] text-white shadow-[0_12px_28px_rgba(23,76,58,0.18)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_35px_rgba(23,76,58,0.28)] disabled:cursor-not-allowed disabled:opacity-60 sm:mt-8 sm:py-[18px] sm:text-xs"
+                className="details-order-button"
               >
                 {ordering ? (
                   <>
-                    <span className="loading loading-spinner loading-sm" />
-                    Processing Order...
+                    <span className="details-button-spinner"></span>
+                    Processing Your Order...
                   </>
                 ) : (
                   <>
+                    <FiShoppingBag />
                     Order This Delight
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full border border-white/30 transition-all duration-300 group-hover:translate-x-1 group-hover:bg-white group-hover:text-[#174C3A]">
-                      →
+                    <span className="order-arrow">
+                      <FiArrowRight />
                     </span>
                   </>
                 )}
               </button>
 
-              {/* Back to Menu */}
-              <Link
-                to="/AllFood"
-                className="mt-5 text-center text-[10px] font-bold uppercase tracking-[0.18em] text-[#68766C] transition hover:text-[#174C3A]"
-              >
-                ← Back to Our Menu
-              </Link>
+              {/* TRUST MESSAGE */}
+              <div className="details-trust-message">
+                <FiCheckCircle />
+                <span>A memorable dining experience awaits you.</span>
+              </div>
 
-              {/* Brand Signature */}
-              <div className="mt-8 border-t border-[#B58A42]/20 pt-5 text-center">
-                <p className="font-serif text-lg font-bold tracking-wide text-[#174C3A]">
-                  Abrar's Dine
-                </p>
+              {/* BRAND SIGNATURE */}
+              <div className="details-brand-signature">
+                <span>Abrar's Dine</span>
 
-                <p className="mt-1 text-[8px] font-bold uppercase tracking-[0.3em] text-[#A18A60]">
-                  Taste • Quality • Tradition
+                <p>
+                  TASTE <i>•</i> QUALITY <i>•</i> TRADITION
                 </p>
               </div>
             </div>
-          </div>
+          </section>
 
-          {/* Bottom Brand Message */}
-          <div className="mt-8 text-center sm:mt-10">
-            <p className="font-serif text-sm italic text-[#829087] sm:text-base">
-              Every dish tells a story. Every bite creates a memory.
-            </p>
+          {/* BOTTOM MESSAGE */}
+          <div className="details-bottom-message">
+            <span></span>
+
+            <p>Every dish tells a story. Every bite creates a memory.</p>
+
+            <span></span>
           </div>
         </div>
       </main>

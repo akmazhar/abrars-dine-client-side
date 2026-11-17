@@ -1,145 +1,176 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import React from "react";
+import ReactDOM from "react-dom/client";
 import "./index.css";
-import AuthProvider from './AuthProvider/AuthProvider';
-import UserProfile from './Pages/UserProfile/UserProfile';
-import MainLayout from './MainLayout/MainLayout';
-import ErrorPage from './Pages/ErrorPage/ErrorPage';
-import Home from './Pages/Home/Home';
-import Register from './Pages/Register/Register';
-import Login from './Pages/Login/Login';
-import Blog from './Pages/Blog/Blog';
-import AllFood from './Pages/AllFood/AllFood';
-import MyOrder from './Pages/MyOrder/MyOrder';
-import UpdateFood from './Pages/UpdateFood/UpdateFood';
-import MyAddedFood from './Pages/MyAddedFood/MyAddedFood';
-import Details from './Pages/AllFood/Details';
-import PrivetRoute from './Router/PrivetRoute';
-import FoodPurchase from './Pages/FoodPurchase/FoodPurchase';
-import AddFood from './Pages/AddFood/AddFood';
-// import Add from './Pages/MyAddedFood/Add';
-// import Banner from './Pages/Shared/Banner/Banner';
-// import Navbar from './Pages/Shared/Header/Navbar/Navbar';
-// import Footer from './Pages/Shared/Footer/Footer';
-// import Logo from './Pages/Shared/Header/Logo/Logo';
-// import FoodCard from './Pages/FoodCard/FoodCard';
-// import PrivetRoute from './Router/PrivetRoute';
-// import Pagination from './Pages/Pagination/Pagination';
-// import SearchFunctionality from './Pages/SearchFunctionality/SearchFunctionality';
-// import SingleFood from './Pages/SingleFood/SingleFood';
-// import EachCard from './Pages/EachCard/EachCard';
 
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import AuthProvider from "./AuthProvider/AuthProvider";
 
+import MainLayout from "./MainLayout/MainLayout";
+import ErrorPage from "./Pages/ErrorPage/ErrorPage";
+import Home from "./Pages/Home/Home";
+import Register from "./Pages/Register/Register";
+import Login from "./Pages/Login/Login";
+import Blog from "./Pages/Blog/Blog";
+import AllFood from "./Pages/AllFood/AllFood";
+import MyOrder from "./Pages/MyOrder/MyOrder";
+import UpdateFood from "./Pages/UpdateFood/UpdateFood";
+import MyAddedFood from "./Pages/MyAddedFood/MyAddedFood";
+import Details from "./Pages/AllFood/Details";
+import PrivetRoute from "./Router/PrivetRoute";
+import FoodPurchase from "./Pages/FoodPurchase/FoodPurchase";
+import AddFood from "./Pages/AddFood/AddFood";
+import UserProfile from "./Pages/UserProfile/UserProfile";
 
+// Backend API
+const API_URL = "https://abrars-dine-server.onrender.com";
 
+// Create Router
 const router = createBrowserRouter([
   {
     path: "/",
-    element : <MainLayout></MainLayout>,
-    errorElement : <ErrorPage></ErrorPage>,
-    children : [
-  {
-      path : "/",
-      element : <Home></Home>
-  },
-  {
-    path: "/register",
-    element: <Register></Register>
-  },
-  
-  {
-    path: "/login",
-    element: <Login></Login>
-  },
-  {
-    path: "/allFood",
-    element: <AllFood></AllFood>
-  },
-  {
-    path: "/blog",
-    element: <Blog></Blog>
-  },
-  {
-    path: "/myOrder",
-    element: <PrivetRoute><MyOrder></MyOrder></PrivetRoute>
-  },
-  {
-    path: "/userProfile",
-    element: <UserProfile></UserProfile>
-  },
-  {
-    path: "/updateFood",
-    element: <PrivetRoute><UpdateFood></UpdateFood></PrivetRoute>,
-    loader: ({params}) => fetch(`https://restaurant-management-server-three.vercel.app/updateFood/${params.id}`) 
-  },
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
 
-  {
-    path: "/myAddedFood",
-    element:<PrivetRoute><MyAddedFood></MyAddedFood></PrivetRoute>
-  },
-  {
-    path: "/details/:id",
-    element: <Details></Details>
-  },
-   {
-    path: "/foodPurchase",
-    element: <FoodPurchase></FoodPurchase>,
-    loader: ({params}) => fetch(`https://restaurant-management-server-three.vercel.app/foodPurchase/${params.id}`) 
-  },
-  {
-    path: "/addFood",
-    element: <AddFood>,</AddFood>
-  },
+    children: [
+      // Home
+      {
+        index: true,
+        element: <Home />,
+      },
 
-  // {
-  //   path: "/eachCard",
-  //   element: <EachCard></EachCard>
-  // },
-  // {
-  //   path: "/foodCard",
-  //   element: <FoodCard></FoodCard>
-  // },
+      // Authentication
+      {
+        path: "register",
+        element: <Register />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
 
+      // All Food
+      {
+        path: "allFood",
+        element: <AllFood />,
+        loader: async () => {
+          const response = await fetch(`${API_URL}/allfood`);
 
-  // {
-  //   path: "/pagination",
-  //   element: <Pagination></Pagination>
-  //   loader: ({currentPage, itemsPerPage}) => fetch(`https://restaurant-management-server-three.vercel.app/count?_page=${currentPage}&_limit=${itemsPerPage}`)
-  // },
-  // {
-  //   path: "/searchFunctionality",
-  //   element: <SearchFunctionality></SearchFunctionality>,
-  //   loader: ({params}) => fetch(`https://restaurant-management-server-three.vercel.app/dish/${params.name}`) 
-  // },
-  // {
-  //   path: "/singleFood",
-  //   element: <SingleFood></SingleFood>
-  // },
- 
-  
-  // {
-  //   path: "/add",
-  //   element: <Add></Add>
-  // },
+          if (!response.ok) {
+            throw new Response("Failed to load food data", {
+              status: response.status,
+              statusText: response.statusText,
+            });
+          }
 
-  ]
+          return response.json();
+        },
+      },
+
+      // Blog
+      {
+        path: "blog",
+        element: <Blog />,
+      },
+
+      // My Orders
+      {
+        path: "myOrder",
+        element: (
+          <PrivetRoute>
+            <MyOrder />
+          </PrivetRoute>
+        ),
+      },
+
+      // User Profile
+      {
+        path: "userProfile",
+        element: (
+          <PrivetRoute>
+            <UserProfile />
+          </PrivetRoute>
+        ),
+      },
+
+      // Update Food
+      {
+        path: "updateFood/:id",
+        element: (
+          <PrivetRoute>
+            <UpdateFood />
+          </PrivetRoute>
+        ),
+        loader: async ({ params }) => {
+          const response = await fetch(`${API_URL}/updateFood/${params.id}`);
+
+          if (!response.ok) {
+            throw new Response("Failed to load food details", {
+              status: response.status,
+              statusText: response.statusText,
+            });
+          }
+
+          return response.json();
+        },
+      },
+
+      // My Added Food
+      {
+        path: "myAddedFood",
+        element: (
+          <PrivetRoute>
+            <MyAddedFood />
+          </PrivetRoute>
+        ),
+      },
+
+      // Food Details
+      {
+        path: "details/:id",
+        element: <Details />,
+      },
+
+      // Food Purchase
+      {
+        path: "foodPurchase/:id",
+        element: (
+          <PrivetRoute>
+            <FoodPurchase />
+          </PrivetRoute>
+        ),
+        loader: async ({ params }) => {
+          const response = await fetch(`${API_URL}/foodPurchase/${params.id}`);
+
+          if (!response.ok) {
+            throw new Response("Failed to load purchase details", {
+              status: response.status,
+              statusText: response.statusText,
+            });
+          }
+
+          return response.json();
+        },
+      },
+
+      // Add Food
+      {
+        path: "addFood",
+        element: (
+          <PrivetRoute>
+            <AddFood />
+          </PrivetRoute>
+        ),
+      },
+    ],
   },
 ]);
 
-export default router;
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <div className='max-w-7xl mx-auto'>
+// Render Application
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
- <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </AuthProvider>
   </React.StrictMode>,
-  </div>
-)
+);

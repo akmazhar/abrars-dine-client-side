@@ -1,68 +1,73 @@
+import {
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 
-import { GoogleAuthProvider, 
-        createUserWithEmailAndPassword, 
-        onAuthStateChanged,
-        signInWithEmailAndPassword,
-        signInWithPopup,
-        signOut
-        //getAuth
-       } from 'firebase/auth';
-import { createContext, useEffect, useState } from 'react';
-import { auth } from '../firebase/firebase.config';
-import PropTypes from 'prop-types';
-
-
-
-
-
+import { createContext, useEffect, useState } from "react";
+import { auth } from "../firebase/firebase.config";
+import PropTypes from "prop-types";
 
 export const AuthContext = createContext(null);
+
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
-const [user, setUser] = useState(null);
-const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-const createUser = (email, password) => {
-return createUserWithEmailAndPassword(auth, email, password);
-};
+  // Register a new user
+  const createUser = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
-const signInUser = (email, password) => {
-return signInWithEmailAndPassword(auth, email, password);
-};
+  // Login with email and password
+  const signInUser = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
-const signInWithGoogle = () => {
-signInWithPopup(auth, googleProvider);
-};
+  // Login with Google
+  const signInWithGoogle = () => {
+    return signInWithPopup(auth, googleProvider);
+  };
 
-const logOut = () => {
-setLoading(true);
-return signOut(auth);
-};
-console.log(user)
-useEffect(()=>{
-    const unSubscribe = onAuthStateChanged(auth, (currentUser)=>{
+  // Logout user
+  const logOut = () => {
+    return signOut(auth);
+  };
+
+  // Monitor Firebase authentication state
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (currentUser) => {
         setUser(currentUser);
-        setLoading(false)
-    });
-    return ()=> {
-        unSubscribe();
-    }
-},[])
+        setLoading(false);
+      },
+      (error) => {
+        console.error("Authentication state error:", error);
+        setUser(null);
+        setLoading(false);
+      },
+    );
 
-const authInfo = {
-user,
-loading,
-createUser,
-signInUser,
-signInWithGoogle,
-logOut,
-};
+    return () => unsubscribe();
+  }, []);
 
-return (
-    
-<AuthContext.Provider value={authInfo}>
-    {children}</AuthContext.Provider>
+  const authInfo = {
+    user,
+    loading,
+    createUser,
+    signInUser,
+    signInWithGoogle,
+    logOut,
+  };
+
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
 };
 
@@ -71,4 +76,3 @@ AuthProvider.propTypes = {
 };
 
 export default AuthProvider;
-
