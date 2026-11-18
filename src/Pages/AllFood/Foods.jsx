@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const API_URL = "https://restaurant-management-server-three.vercel.app";
+const API_URL = "https://abrars-dine-server.onrender.com";
 
 const Foods = ({ foods }) => {
   const navigate = useNavigate();
@@ -10,7 +10,6 @@ const Foods = ({ foods }) => {
   const [fetchedFoods, setFetchedFoods] = useState([]);
   const [loading, setLoading] = useState(!Array.isArray(foods));
   const [error, setError] = useState("");
-  const [orderingId, setOrderingId] = useState(null);
 
   // Support both AllFood.jsx props and standalone usage
   const isControlled = Array.isArray(foods);
@@ -61,65 +60,24 @@ const Foods = ({ foods }) => {
     return () => controller.abort();
   }, [isControlled]);
 
-  // Individual Food Order Handler
-  const myOrderHandle = async (food) => {
-    const foodId = food._id || food.id || food.name;
+  // Navigate to Food Purchase Page
+  const myOrderHandle = (food) => {
+    const foodId = food?._id;
 
-    if (orderingId !== null) return;
-
-    try {
-      setOrderingId(foodId);
-
-      const oneCart = {
-        image: food.image,
-        name: food.name,
-        category: food.category,
-        chef: food.chef,
-        price: food.price,
-        quantity: food.quantity,
-        origin: food.origin,
-        description: food.description,
-      };
-
-      const response = await fetch(`${API_URL}/myOrder`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(oneCart),
-      });
-
-      if (!response.ok) {
-        throw new Error("Your order could not be processed.");
-      }
-
-      const result = await response.json();
-
-      if (result.insertedId) {
-        await Swal.fire({
-          title: "Delicious Choice!",
-          text: `${food.name} has been added to your orders.`,
-          icon: "success",
-          confirmButtonText: "View My Orders",
-          confirmButtonColor: "#174C3A",
-          background: "#F5F1E8",
-          color: "#24382E",
-        });
-
-        navigate("/myOrder");
-      } else {
-        throw new Error(result.message || "Unable to confirm your order.");
-      }
-    } catch (err) {
+    if (!foodId) {
       Swal.fire({
-        title: "Order Unsuccessful",
-        text: err.message || "Please try again later.",
+        title: "Unable to Continue",
+        text: "Food information is missing. Please try again.",
         icon: "error",
         confirmButtonColor: "#174C3A",
+        background: "#F5F1E8",
+        color: "#24382E",
       });
-    } finally {
-      setOrderingId(null);
+
+      return;
     }
+
+    navigate(`/foodPurchase/${foodId}`);
   };
 
   // Loading State
@@ -128,6 +86,7 @@ const Foods = ({ foods }) => {
       <div className="flex min-h-[350px] items-center justify-center">
         <div className="text-center">
           <span className="loading loading-spinner loading-lg text-[#174C3A]" />
+
           <p className="mt-4 font-serif text-sm tracking-wider text-[#174C3A]">
             Preparing Our Delicious Collection...
           </p>
@@ -179,17 +138,13 @@ const Foods = ({ foods }) => {
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-7 xl:grid-cols-3 xl:gap-8">
       {data.map((food, index) => {
         const foodId = food._id || food.id || food.name;
-        const isOrdering = orderingId === foodId;
 
         return (
           <article
             key={foodId || index}
             className="group relative flex h-full flex-col overflow-hidden rounded-[25px] border border-[#B58A42]/20 bg-white shadow-[0_10px_35px_rgba(36,56,46,0.06)] transition-all duration-500 hover:-translate-y-2 hover:border-[#B58A42]/50 hover:shadow-[0_22px_55px_rgba(36,56,46,0.13)]"
           >
-            {/* =========================
-                FOOD IMAGE
-            ========================= */}
-
+            {/* FOOD IMAGE */}
             <div className="relative h-[235px] overflow-hidden bg-[#EEE9DD] sm:h-[250px]">
               <img
                 src={food.image}
@@ -225,10 +180,7 @@ const Foods = ({ foods }) => {
               </div>
             </div>
 
-            {/* =========================
-                FOOD INFORMATION
-            ========================= */}
-
+            {/* FOOD INFORMATION */}
             <div className="flex flex-1 flex-col px-5 pb-5 pt-5 sm:px-6 sm:pb-6">
               {/* Food Name */}
               <div className="min-h-[55px]">
@@ -322,26 +274,16 @@ const Foods = ({ foods }) => {
                 </div>
               </div>
 
-              {/* =========================
-                  ACTION BUTTON
-              ========================= */}
-
+              {/* ACTION BUTTON */}
               <button
                 type="button"
                 onClick={() => myOrderHandle(food)}
-                disabled={orderingId !== null}
-                className="group/btn mt-6 flex w-full items-center justify-between rounded-full bg-gradient-to-r from-[#174C3A] to-[#216448] px-5 py-3.5 text-[9px] font-extrabold uppercase tracking-[0.17em] text-white shadow-[0_8px_20px_rgba(23,76,58,0.15)] transition-all duration-300 hover:shadow-[0_12px_28px_rgba(23,76,58,0.25)] disabled:cursor-not-allowed disabled:opacity-60 sm:px-6"
+                className="group/btn mt-6 flex w-full items-center justify-between rounded-full bg-gradient-to-r from-[#174C3A] to-[#216448] px-5 py-3.5 text-[9px] font-extrabold uppercase tracking-[0.17em] text-white shadow-[0_8px_20px_rgba(23,76,58,0.15)] transition-all duration-300 hover:shadow-[0_12px_28px_rgba(23,76,58,0.25)] sm:px-6"
               >
-                <span>
-                  {isOrdering ? "Processing Order..." : "Order This Delight"}
-                </span>
+                <span>Order This Delight</span>
 
                 <span className="flex h-7 w-7 items-center justify-center rounded-full border border-white/30 transition-all duration-300 group-hover/btn:translate-x-1 group-hover/btn:bg-white group-hover/btn:text-[#174C3A]">
-                  {isOrdering ? (
-                    <span className="loading loading-spinner loading-xs" />
-                  ) : (
-                    "→"
-                  )}
+                  →
                 </span>
               </button>
             </div>

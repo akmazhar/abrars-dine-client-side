@@ -5,7 +5,6 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import AuthProvider from "./AuthProvider/AuthProvider";
-
 import MainLayout from "./MainLayout/MainLayout";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage";
 import Home from "./Pages/Home/Home";
@@ -22,10 +21,8 @@ import FoodPurchase from "./Pages/FoodPurchase/FoodPurchase";
 import AddFood from "./Pages/AddFood/AddFood";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 
-// Backend API
 const API_URL = "https://abrars-dine-server.onrender.com";
 
-// Create Router
 const router = createBrowserRouter([
   {
     path: "/",
@@ -33,7 +30,6 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
 
     children: [
-      // Home
       {
         index: true,
         element: <Home />,
@@ -95,14 +91,16 @@ const router = createBrowserRouter([
 
       // Update Food
       {
-        path: "updateFood/:id",
+        path: "UpdateFood/:id",
         element: (
           <PrivetRoute>
             <UpdateFood />
           </PrivetRoute>
         ),
         loader: async ({ params }) => {
-          const response = await fetch(`${API_URL}/updateFood/${params.id}`);
+          const response = await fetch(
+            `${API_URL}/updateFood/${encodeURIComponent(params.id)}`,
+          );
 
           if (!response.ok) {
             throw new Response("Failed to load food details", {
@@ -166,7 +164,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-// Render Application
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
+
 import {
   FiCalendar,
   FiShoppingBag,
@@ -13,6 +14,7 @@ import {
 
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
+// Local Backend API
 const API_URL = "https://abrars-dine-server.onrender.com";
 
 const FoodPurchase = () => {
@@ -36,9 +38,11 @@ const FoodPurchase = () => {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 text-center">
         <h2 className="text-2xl font-bold text-[#174C3A]">Food Not Found</h2>
+
         <p className="mt-2 text-gray-600">
           The selected food item could not be found.
         </p>
+
         <button
           onClick={() => navigate("/allFood")}
           className="mt-5 rounded-xl bg-[#174C3A] px-6 py-3 font-semibold text-white"
@@ -54,13 +58,16 @@ const FoodPurchase = () => {
   const handlePurchase = async (event) => {
     event.preventDefault();
 
+    if (isSubmitting) return;
+
     if (!user) {
-      Swal.fire({
+      await Swal.fire({
         title: "Login Required",
         text: "Please log in before purchasing this food.",
         icon: "warning",
         confirmButtonColor: "#174C3A",
       });
+
       navigate("/login", {
         state: {
           from: {
@@ -68,6 +75,7 @@ const FoodPurchase = () => {
           },
         },
       });
+
       return;
     }
 
@@ -87,6 +95,20 @@ const FoodPurchase = () => {
       Swal.fire({
         title: "Invalid Quantity",
         text: "Please enter a valid quantity.",
+        icon: "warning",
+        confirmButtonColor: "#174C3A",
+      });
+      return;
+    }
+
+    if (
+      quantity !== undefined &&
+      Number.isFinite(Number(quantity)) &&
+      selectedQuantity > Number(quantity)
+    ) {
+      Swal.fire({
+        title: "Insufficient Stock",
+        text: `Only ${quantity} items are currently available.`,
         icon: "warning",
         confirmButtonColor: "#174C3A",
       });
@@ -119,22 +141,44 @@ const FoodPurchase = () => {
         );
       }
 
-      const result = await Swal.fire({
-        title: "Purchase Successful!",
-        text: "Your order has been placed successfully.",
+      // Successful Purchase Alert - Stay on Current Page
+      await Swal.fire({
+        title: "Your Purchase is Complete!",
+        html: `
+          <div style="text-align:center; padding: 8px 0;">
+            <p style="font-size:17px; color:#174C3A; font-weight:600;">
+              Thank You for Your Order!
+            </p>
+            <p style="font-size:14px; color:#666; margin-top:10px;">
+              ${name} has been successfully added to your orders.
+            </p>
+            <p style="font-size:14px; color:#666; margin-top:8px;">
+              Quantity: ${selectedQuantity}
+            </p>
+            <p style="font-size:20px; color:#174C3A; font-weight:700; margin-top:12px;">
+              Total: ৳${(Number(price || 0) * selectedQuantity).toLocaleString(
+                "en-BD",
+              )}
+            </p>
+          </div>
+        `,
         icon: "success",
-        confirmButtonText: "View My Orders",
+        confirmButtonText: "Continue Shopping",
         confirmButtonColor: "#174C3A",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
       });
 
-      if (result.isConfirmed) {
-        navigate("/myOrder");
-      }
+      // No navigation after successful purchase.
+      // User stays on the FoodPurchase page.
+
+      setPurchaseQuantity(1);
+      setBuyingDate("");
     } catch (error) {
       console.error("Purchase Error:", error);
 
       Swal.fire({
-        title: "Purchase Failed",
+        title: "Purchase Failed!",
         text: error.message || "Something went wrong. Please try again.",
         icon: "error",
         confirmButtonColor: "#174C3A",
@@ -166,6 +210,7 @@ const FoodPurchase = () => {
 
           <div className="grid overflow-hidden rounded-3xl bg-white shadow-xl lg:grid-cols-2">
             {/* Food Preview */}
+
             <div className="bg-[#174C3A] p-6 text-white md:p-10">
               <div className="overflow-hidden rounded-2xl">
                 <img
@@ -191,6 +236,7 @@ const FoodPurchase = () => {
                 <div className="mt-7 flex items-center justify-between border-t border-white/20 pt-6">
                   <div>
                     <p className="text-sm text-white/70">Price per item</p>
+
                     <p className="mt-1 text-3xl font-bold text-[#E7C98C]">
                       ৳{price}
                     </p>
@@ -198,6 +244,7 @@ const FoodPurchase = () => {
 
                   <div className="text-right">
                     <p className="text-sm text-white/70">Available quantity</p>
+
                     <p className="mt-1 text-xl font-semibold">
                       {quantity ?? "N/A"}
                     </p>
@@ -207,6 +254,7 @@ const FoodPurchase = () => {
             </div>
 
             {/* Purchase Form */}
+
             <div className="p-6 md:p-10 lg:p-12">
               <div className="mb-8">
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#B58A42]">
@@ -223,6 +271,8 @@ const FoodPurchase = () => {
               </div>
 
               <form onSubmit={handlePurchase} className="space-y-5">
+                {/* Customer Name */}
+
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-gray-700">
                     Customer Name
@@ -230,6 +280,7 @@ const FoodPurchase = () => {
 
                   <div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3.5">
                     <FiUser className="text-[#174C3A]" />
+
                     <input
                       type="text"
                       value={user?.displayName || "Customer"}
@@ -239,6 +290,8 @@ const FoodPurchase = () => {
                   </div>
                 </div>
 
+                {/* Email */}
+
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-gray-700">
                     Email Address
@@ -246,6 +299,7 @@ const FoodPurchase = () => {
 
                   <div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3.5">
                     <FiMail className="text-[#174C3A]" />
+
                     <input
                       type="email"
                       value={user?.email || ""}
@@ -255,6 +309,8 @@ const FoodPurchase = () => {
                   </div>
                 </div>
 
+                {/* Quantity */}
+
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-gray-700">
                     Purchase Quantity
@@ -263,6 +319,7 @@ const FoodPurchase = () => {
                   <input
                     type="number"
                     min="1"
+                    max={quantity !== undefined ? quantity : undefined}
                     step="1"
                     required
                     value={purchaseQuantity}
@@ -271,6 +328,8 @@ const FoodPurchase = () => {
                   />
                 </div>
 
+                {/* Buying Date */}
+
                 <div>
                   <label className="mb-2 block text-sm font-semibold text-gray-700">
                     Buying Date
@@ -278,16 +337,25 @@ const FoodPurchase = () => {
 
                   <div className="relative">
                     <FiCalendar className="absolute left-4 top-1/2 -translate-y-1/2 text-[#174C3A]" />
+
                     <input
                       type="date"
                       required
-                      min={new Date().toISOString().split("T")[0]}
+                      min={
+                        new Date(
+                          Date.now() - new Date().getTimezoneOffset() * 60000,
+                        )
+                          .toISOString()
+                          .split("T")[0]
+                      }
                       value={buyingDate}
                       onChange={(e) => setBuyingDate(e.target.value)}
                       className="w-full rounded-xl border border-gray-200 py-3.5 pl-11 pr-4 outline-none transition focus:border-[#174C3A] focus:ring-2 focus:ring-[#174C3A]/10"
                     />
                   </div>
                 </div>
+
+                {/* Order Summary */}
 
                 <div className="rounded-xl bg-[#F5F1E8] p-4">
                   <div className="flex items-center justify-between text-sm text-gray-600">
@@ -313,6 +381,8 @@ const FoodPurchase = () => {
                     </span>
                   </div>
                 </div>
+
+                {/* Confirm Purchase Button */}
 
                 <button
                   type="submit"

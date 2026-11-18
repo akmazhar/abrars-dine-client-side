@@ -8,8 +8,9 @@ import {
 } from "firebase/auth";
 
 import { createContext, useEffect, useState } from "react";
-import { auth } from "../firebase/firebase.config";
+
 import PropTypes from "prop-types";
+import { auth } from "../firebase/firebase.config";
 
 export const AuthContext = createContext(null);
 
@@ -19,12 +20,12 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Register a new user
+  // Register User
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  // Login with email and password
+  // Login with Email and Password
   const signInUser = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
@@ -34,12 +35,12 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
-  // Logout user
+  // Logout User
   const logOut = () => {
     return signOut(auth);
   };
 
-  // Monitor Firebase authentication state
+  // Firebase Authentication Observer
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(
       auth,
@@ -48,7 +49,8 @@ const AuthProvider = ({ children }) => {
         setLoading(false);
       },
       (error) => {
-        console.error("Authentication state error:", error);
+        console.error("Firebase authentication error:", error);
+
         setUser(null);
         setLoading(false);
       },
